@@ -1,2 +1,3 @@
 gitops:
   repo: https://github.com/Cal3165/homelab
+  revision: master
