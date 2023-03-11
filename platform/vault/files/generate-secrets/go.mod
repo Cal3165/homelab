@@ -1,4 +1,4 @@
-module git.notusa.uk/khuedoan/homelab/vault/init
+module git.notusa.uk/Cal3165/homelab/vault/init
 
 go 1.19
 

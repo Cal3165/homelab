@@ -27,7 +27,7 @@ hajimari:
           - name: Documentation
             url: https://homelab.notusa.uk
           - name: Public GitHub repository
-            url: https://github.com/khuedoan/homelab
+            url: https://github.com/Cal3165/homelab
       - group: Managed services
         bookmarks:
           - name: Terraform Cloud

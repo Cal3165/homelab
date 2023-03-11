@@ -1,4 +1,4 @@
-module git.notusa.uk/khuedoan/homelab/gitea/config
+module git.notusa.uk/Cal3165/homelab/gitea/config
 
 go 1.19
 
