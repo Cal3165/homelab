@@ -3,7 +3,7 @@
 site_name: Khue's Homelab
 copyright: Copyright &copy; 2020 - 2022 Khue Doan
 
-repo_url: https://github.com/khuedoan/homelab
+repo_url: https://github.com/Cal3165/homelab
 
 theme:
   name: material
