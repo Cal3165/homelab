@@ -1,0 +1,7 @@
+apiVersion: v2
+name: treafik
+version: 0.0.0
+dependencies:
+  - name: treafik
+    version: 21.2.0
+    repository: https://traefik.github.io/charts
