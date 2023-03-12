@@ -27,7 +27,7 @@ dex:
         name: dex-secrets
   ingress:
     enabled: true
-    className: treafik-traefik
+    className: traefik-traefik
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
       hajimari.io/enable: 'false'

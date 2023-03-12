@@ -4,7 +4,7 @@ harbor:
       hosts:
         core: harbor.notusa.uk
         notary: notary.notusa.uk
-      className: treafik-traefik
+      className: traefik-traefik
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         ingress.kubernetes.io/ssl-redirect: "true"

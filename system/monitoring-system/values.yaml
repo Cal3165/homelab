@@ -3,7 +3,7 @@ kube-prometheus-stack:
     adminPassword: null
     ingress:
       enabled: true
-      ingressClassName: treafik-traefik
+      ingressClassName: traefik-traefik
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         hajimari.io/appName: Grafana

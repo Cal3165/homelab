@@ -8,7 +8,7 @@ metadata:
     hajimari.io/appName: Tekton
     hajimari.io/icon: robot-industrial
 spec:
-  ingressClassName: treafik-traefik
+  ingressClassName: traefik-traefik
   rules:
     - host: &host tekton.notusa.uk
       http:
