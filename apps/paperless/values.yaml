@@ -2,7 +2,7 @@ paperless:
   ingress:
     main:
       enabled: true
-      ingressClassName: nginx
+      ingressClassName: treafik-traefik
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         hajimari.io/appName: Paperless
