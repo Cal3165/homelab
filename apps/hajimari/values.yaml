@@ -1,10 +1,10 @@
 hajimari:
   env:
-    TZ: Asia/Ho_Chi_Minh
+    TZ: Europe/London
   ingress:
     main:
       enabled: true
-      ingressClassName: nginx
+      ingressClassName: treafik-traefik
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         hajimari.io/enable: 'false'
