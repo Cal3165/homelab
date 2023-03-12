@@ -1,7 +1,11 @@
 gitea:
   ingress:
     enabled: true
+<<<<<<< HEAD
     className: traefik-traefik
+=======
+    className: nginx
+>>>>>>> c496506e92731c37048a214ea15e954188ed7d58
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
       hajimari.io/appName: Gitea
