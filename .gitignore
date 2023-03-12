@@ -7,4 +7,3 @@ book/
 *.tgz
 *kubeconfig.yaml
 Chart.lock
-system/ingress-nginx/*
