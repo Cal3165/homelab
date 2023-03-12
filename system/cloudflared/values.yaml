@@ -5,7 +5,7 @@ cloudflared:
     tunnel: homelab
     ingress:
       - hostname: '*.notusa.uk'
-        service: https://ingress-nginx-controller.ingress-nginx
+        service: https://treafik-traefik.treafik
         originRequest:
           noTLSVerify: true
       - service: http_status:404
