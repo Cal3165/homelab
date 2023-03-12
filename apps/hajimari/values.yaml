@@ -4,7 +4,7 @@ hajimari:
   ingress:
     main:
       enabled: true
-      ingressClassName: traefik-traefik
+      ingressClassName: traefik
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         hajimari.io/enable: 'false'

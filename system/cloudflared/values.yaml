@@ -5,7 +5,7 @@ cloudflared:
     tunnel: homelab
     ingress:
       - hostname: '*.notusa.uk'
-        service: https://traefik-traefik.traefik
+        service: https://traefik.traefik
         originRequest:
           noTLSVerify: true
       - service: http_status:404

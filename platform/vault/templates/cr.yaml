@@ -72,7 +72,7 @@ spec:
       hajimari.io/appName: Vault
       hajimari.io/icon: database-lock
     spec:
-      ingressClassName: traefik-traefik
+      ingressClassName: traefik
       rules:
         - host: &host vault.notusa.uk
           http:
