@@ -1,18 +1,14 @@
 terraform {
   required_version = "~> 1.6.0"
-
-  backend "local" {
-    path = "/root/homelab/external/terraform.tfstate"
-  }
-
-  /* backend "remote" {
+  
+  backend "remote" {
     hostname     = "app.terraform.io"
-    organization = "khuedoan"
+    organization = "cal-homelab"
 
     workspaces {
       name = "homelab-external"
     }
-  } */
+  }
 
   required_providers {
     cloudflare = {
