@@ -52,7 +52,7 @@ blocky:
       enabled: true
       hosts:
       - dns.notusa.uk
-      certificateIssuer: cloudflare-issuer
+      certificateIssuer: letsencrypt-prod
   persistence:
     cert-file:
       enabled: true
