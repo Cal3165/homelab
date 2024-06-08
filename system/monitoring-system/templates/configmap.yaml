@@ -11,7 +11,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: grafana
-    grafana_dashboard: 1
+    grafana_dashboard: "1"
   name: grafana-cilium-dashboard
   namespace: cilium-monitoring
 data:
@@ -8268,7 +8268,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: grafana
-    grafana_dashboard: 1
+    grafana_dashboard: "1"
   name: grafana-cilium-operator-dashboard
   namespace: cilium-monitoring
 data:
@@ -9278,7 +9278,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: grafana
-    grafana_dashboard: 1
+    grafana_dashboard: "1"
   name: grafana-hubble-dashboard
   namespace: cilium-monitoring
 data:
@@ -12522,7 +12522,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: grafana
-    grafana_dashboard: 1
+    grafana_dashboard: "1"
   name: grafana-hubble-l7-http-metrics-by-workload
   namespace: cilium-monitoring
 data:
