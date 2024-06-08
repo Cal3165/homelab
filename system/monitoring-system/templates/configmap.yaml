@@ -16,7 +16,7 @@ metadata:
   namespace: cilium-monitoring
 data:
   cilium-dashboard.json: |
-    '{
+    {
       "annotations": {
         "list": [
           {
@@ -97,7 +97,7 @@ data:
               "expr": "sum(rate(cilium_errors_warnings_total{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, level) * 60",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{level}}",
+              "legendFormat": "'{{"{{"}}level{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -8260,7 +8260,7 @@ data:
       "title": "Cilium Metrics",
       "uid": "vtuWtdumz",
       "version": 1
-    }'
+    }
 ---
 # Source: prometheus/templates/grafana.yaml
 apiVersion: v1
