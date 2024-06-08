@@ -939,7 +939,7 @@ data:
               "expr": "avg(rate(cilium_agent_api_process_time_seconds_sum{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])/rate(cilium_agent_api_process_time_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, method, path)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} {{path}}",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}' '{{"{{"}}path{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -1040,7 +1040,7 @@ data:
               "expr": "max(rate(cilium_agent_api_process_time_seconds_sum{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])/rate(cilium_agent_api_process_time_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, method, path)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} {{path}}",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}' '{{"{{"}}path{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -1141,7 +1141,7 @@ data:
               "expr": "avg(rate(cilium_agent_api_process_time_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, method, path)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} {{path}} ",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}' '{{"{{"}}path{{"}}"}}' ",
               "refId": "A"
             }
           ],
@@ -1242,7 +1242,7 @@ data:
               "expr": "max(rate(cilium_agent_api_process_time_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, method, path)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} {{path}} ",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}' '{{"{{"}}path{{"}}"}}' ",
               "refId": "A"
             }
           ],
@@ -1343,7 +1343,7 @@ data:
               "expr": "avg(rate(cilium_agent_api_process_time_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, method, path, return_code)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{return_code}} ({{method}} {{path}} )",
+              "legendFormat": "'{{"{{"}}return_code{{"}}"}}' ('{{"{{"}}method{{"}}"}}' '{{"{{"}}path{{"}}"}}' )",
               "refId": "A"
             }
           ],
@@ -1444,7 +1444,7 @@ data:
               "expr": "sum(rate(cilium_agent_api_process_time_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, method, path, return_code)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{return_code}} ({{method}} {{path}} )",
+              "legendFormat": "'{{"{{"}}return_code{{"}}"}}' ('{{"{{"}}method{{"}}"}}' '{{"{{"}}path{{"}}"}}' )",
               "refId": "A"
             }
           ],
@@ -1580,7 +1580,7 @@ data:
               "expr": "avg(rate(cilium_bpf_syscall_duration_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, operation)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{operation}}",
+              "legendFormat": "'{{"{{"}}operation{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -1682,7 +1682,7 @@ data:
               "expr": "max(rate(cilium_bpf_syscall_duration_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, operation)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{operation}}",
+              "legendFormat": "'{{"{{"}}operation{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -1784,7 +1784,7 @@ data:
               "expr": "avg(rate(cilium_bpf_syscall_duration_seconds_sum{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])/ rate(cilium_bpf_syscall_duration_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, operation)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{operation}}",
+              "legendFormat": "'{{"{{"}}operation{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -1883,7 +1883,7 @@ data:
               "expr": "max(rate(cilium_bpf_syscall_duration_seconds_sum{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])/ rate(cilium_bpf_syscall_duration_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, operation)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{operation}}",
+              "legendFormat": "'{{"{{"}}operation{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -1984,7 +1984,7 @@ data:
               "expr": "topk(5, avg(rate(cilium_bpf_map_ops_total{k8s_app=\"cilium\", pod=~\"$pod\"}[5m])) by (pod, map_name, operation))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{map_name}} {{operation}}",
+              "legendFormat": "'{{"{{"}}map_name{{"}}"}}' '{{"{{"}}operation{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -2085,7 +2085,7 @@ data:
               "expr": "topk(5, max(rate(cilium_bpf_map_ops_total{k8s_app=\"cilium\", pod=~\"$pod\"}[5m])) by (pod, map_name, operation))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{map_name}} {{operation}}",
+              "legendFormat": "'{{"{{"}}map_name{{"}}"}}' '{{"{{"}}operation{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -2186,7 +2186,7 @@ data:
               "expr": "sum(rate(cilium_bpf_map_ops_total{k8s_app=\"cilium\",outcome=\"fail\", pod=~\"$pod\"}[5m])) by (pod, map_name, operation)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{map_name}} {{operation}}",
+              "legendFormat": "'{{"{{"}}map_name{{"}}"}}' '{{"{{"}}operation{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -2309,7 +2309,7 @@ data:
               "expr": "sum(rate(kvstore_operations_total{pod=~\"$pod\"}[1m])) by (pod, scope, action)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{scope}} {{action}}",
+              "legendFormat": "'{{"{{"}}scope{{"}}"}}' '{{"{{"}}action{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -2412,7 +2412,7 @@ data:
               "expr": "max(rate(kvstore_operations_total{pod=~\"$pod\"}[1m])) by (pod, scope, action)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{scope}} {{action}}",
+              "legendFormat": "'{{"{{"}}scope{{"}}"}}' '{{"{{"}}action{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -2514,7 +2514,7 @@ data:
               "expr": "topk(5, avg(rate(cilium_kvstore_operations_duration_seconds_sum{pod=~\"$pod\"}[1m])) by (pod, action, scope) / avg(rate(cilium_kvstore_operations_duration_seconds_count{pod=~\"$pod\"}[1m])) by (pod, action, scope))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} {{scope}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' '{{"{{"}}scope{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -2615,7 +2615,7 @@ data:
               "expr": "topk(5, max(rate(cilium_kvstore_operations_duration_seconds_sum{pod=~\"$pod\"}[1m])) by (pod, action, scope) / avg(rate(cilium_kvstore_operations_duration_seconds_count{pod=~\"$pod\"}[1m])) by (pod, action, scope))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} {{scope}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' '{{"{{"}}scope{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -2714,7 +2714,7 @@ data:
               "expr": "avg(rate(cilium_kvstore_events_queue_seconds_count{pod=~\"$pod\"}[1m])) by (pod, scope, action)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} {{scope}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' '{{"{{"}}scope{{"}}"}}'",
               "refId": "B"
             }
           ],
@@ -2832,7 +2832,7 @@ data:
               "expr": "sum(rate(cilium_forward_count_total{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, direction)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{direction}}",
+              "legendFormat": "'{{"{{"}}direction{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -2934,7 +2934,7 @@ data:
               "expr": "sum(rate(cilium_forward_bytes_total{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, direction) * 8",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{direction}}",
+              "legendFormat": "'{{"{{"}}direction{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -3705,7 +3705,7 @@ data:
               "expr": "sum(cilium_ip_addresses{k8s_app=\"cilium\", pod=~\"$pod\"}) by (pod, family)\n",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{family}}",
+              "legendFormat": "'{{"{{"}}family{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -3805,7 +3805,7 @@ data:
               "expr": "sum(cilium_datapath_conntrack_dump_resets_total{k8s_app=\"cilium\", pod=~\"$pod\"}) by (pod, area, family, name)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{name}} {{area}} {{family}}",
+              "legendFormat": "'{{"{{"}}name{{"}}"}}' '{{"{{"}}area{{"}}"}}' '{{"{{"}}family{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -3902,7 +3902,7 @@ data:
               "expr": "avg(rate(cilium_services_events_total{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, action)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -4112,7 +4112,7 @@ data:
               "expr": "sum(rate(cilium_drop_count_total{direction=\"EGRESS\", k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (reason)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{reason}}",
+              "legendFormat": "'{{"{{"}}reason{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -4238,7 +4238,7 @@ data:
               "expr": "avg(rate(cilium_nodes_all_events_received_total{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, event_type, source) * 60",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{eventType}} {{source}}",
+              "legendFormat": "'{{"{{"}}eventType{{"}}"}}' '{{"{{"}}source{{"}}"}}'",
               "refId": "B"
             }
           ],
@@ -4335,7 +4335,7 @@ data:
               "expr": "sum(rate(cilium_drop_bytes_total{direction=\"EGRESS\", k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (reason) * 8",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{reason}}",
+              "legendFormat": "'{{"{{"}}reason{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -4703,7 +4703,7 @@ data:
               "expr": "sum(rate(cilium_drop_count_total{direction=\"INGRESS\", k8s_app=\"cilium\", pod=~\"$pod\"}[5m])) by (reason)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{reason}}",
+              "legendFormat": "'{{"{{"}}reason{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -4825,7 +4825,7 @@ data:
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "{{scope}}",
+              "legendFormat": "'{{"{{"}}scope{{"}}"}}'",
               "refId": "A"
             },
             {
@@ -4929,7 +4929,7 @@ data:
               "expr": "sum(rate(cilium_drop_bytes_total{direction=\"INGRESS\", k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (reason) * 8",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{reason}}",
+              "legendFormat": "'{{"{{"}}reason{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -5174,7 +5174,7 @@ data:
               "expr": "max(rate(cilium_proxy_upstream_reply_seconds_sum{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, scope) / sum(rate(cilium_proxy_upstream_reply_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, scope)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "Max {{scope}}",
+              "legendFormat": "Max '{{"{{"}}scope{{"}}"}}'",
               "refId": "B"
             },
             {
@@ -5289,7 +5289,7 @@ data:
               "instant": true,
               "interval": "1s",
               "intervalFactor": 1,
-              "legendFormat": "{{enforcement}}",
+              "legendFormat": "'{{"{{"}}enforcement{{"}}"}}'",
               "refId": "B"
             }
           ],
@@ -5805,7 +5805,7 @@ data:
               "expr": "avg(rate(cilium_proxy_upstream_reply_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, scope)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{scope}}",
+              "legendFormat": "'{{"{{"}}scope{{"}}"}}'",
               "refId": "B"
             }
           ],
@@ -6051,7 +6051,7 @@ data:
               "expr": "avg(histogram_quantile(0.90, rate(cilium_endpoint_regeneration_time_stats_seconds_bucket{k8s_app=\"cilium\", scope!=\"total\", pod=~\"$pod\"}[5m]))) by (scope)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{scope}}",
+              "legendFormat": "'{{"{{"}}scope{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -6151,7 +6151,7 @@ data:
               "expr": "avg(histogram_quantile(0.99, rate(cilium_endpoint_regeneration_time_stats_seconds_bucket{k8s_app=\"cilium\", scope!=\"total\", pod=~\"$pod\"}[5m]))) by (scope)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{scope}}",
+              "legendFormat": "'{{"{{"}}scope{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -6262,7 +6262,7 @@ data:
               "format": "time_series",
               "instant": false,
               "intervalFactor": 1,
-              "legendFormat": "{{outcome}}",
+              "legendFormat": "'{{"{{"}}outcome{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -6364,7 +6364,7 @@ data:
               "expr": "sum(cilium_endpoint_state{k8s_app=\"cilium\", pod=~\"$pod\"}) by (endpoint_state)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{endpoint_state}}",
+              "legendFormat": "'{{"{{"}}endpoint_state{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -6621,7 +6621,7 @@ data:
               "expr": "sum(rate(cilium_controllers_runs_duration_seconds_sum{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, status) / sum(rate(cilium_controllers_runs_duration_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, status)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{status}}",
+              "legendFormat": "'{{"{{"}}status{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -6743,7 +6743,7 @@ data:
               "expr": "avg(rate(cilium_k8s_client_api_latency_time_seconds_sum{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])/rate(cilium_k8s_client_api_latency_time_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, method, path)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} {{path}}",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}' '{{"{{"}}path{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -6844,7 +6844,7 @@ data:
               "expr": "max(rate(cilium_k8s_client_api_latency_time_seconds_sum{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])/rate(cilium_k8s_client_api_latency_time_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, method, path)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} {{path}}",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}' '{{"{{"}}path{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -6945,7 +6945,7 @@ data:
               "expr": "sum(rate(cilium_k8s_client_api_latency_time_seconds_count{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, method, path)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} {{path}}",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}' '{{"{{"}}path{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -7046,7 +7046,7 @@ data:
               "expr": "sum(rate(cilium_k8s_client_api_calls_total{k8s_app=\"cilium\", pod=~\"$pod\"}[1m])) by (pod, method, return_code)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} {{return_code}}",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}' '{{"{{"}}return_code{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -7146,7 +7146,7 @@ data:
               "expr": "sum(rate(cilium_kubernetes_events_received_total{k8s_app=\"cilium\", equal=\"true\", valid=\"true\", pod=~\"$pod\"}[5m])) by (pod, scope, action)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} {{scope}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' '{{"{{"}}scope{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -7245,7 +7245,7 @@ data:
               "expr": "sum(rate(cilium_kubernetes_events_received_total{k8s_app=\"cilium\", equal=\"true\", valid=\"false\", pod=~\"$pod\"}[5m])) by (pod, scope, action)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} {{scope}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' '{{"{{"}}scope{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -7344,7 +7344,7 @@ data:
               "expr": "sum(rate(cilium_kubernetes_events_received_total{k8s_app=\"cilium\", equal=\"false\", valid=\"true\", pod=~\"$pod\"}[5m])) by (pod, scope, action, valid)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} {{scope}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' '{{"{{"}}scope{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -7443,7 +7443,7 @@ data:
               "expr": "sum(rate(cilium_kubernetes_events_received_total{k8s_app=\"cilium\", equal=\"false\", valid=\"false\", pod=~\"$pod\"}[5m])) by (pod, scope, action)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} {{scope}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' '{{"{{"}}scope{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -7542,7 +7542,7 @@ data:
               "expr": "avg(rate(cilium_kubernetes_events_total{k8s_app=\"cilium\", scope=\"CiliumNetworkPolicy\", pod=~\"$pod\"}[1m])) by (pod, action) * 60",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} avg",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' avg",
               "refId": "B"
             }
           ],
@@ -7645,7 +7645,7 @@ data:
               "expr": "avg(rate(cilium_kubernetes_events_total{k8s_app=\"cilium\", scope=\"NetworkPolicy\", pod=~\"$pod\"}[1m])) by (pod, action) * 60",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} avg",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' avg",
               "refId": "B"
             }
           ],
@@ -7748,7 +7748,7 @@ data:
               "expr": "avg(rate(cilium_kubernetes_events_total{k8s_app=\"cilium\", scope=\"Pod\", pod=~\"$pod\"}[1m])) by (pod, action) * 60",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} avg",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' avg",
               "refId": "B"
             }
           ],
@@ -7851,7 +7851,7 @@ data:
               "expr": "avg(rate(cilium_kubernetes_events_total{k8s_app=\"cilium\", scope=\"Node\", pod=~\"$pod\"}[1m])) by (pod, action) * 60",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} avg",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}' avg",
               "refId": "B"
             }
           ],
@@ -7950,7 +7950,7 @@ data:
               "expr": "avg(rate(cilium_kubernetes_events_total{k8s_app=\"cilium\", scope=\"Service\", pod=~\"$pod\"}[1m])) by (pod, action) * 60",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}'",
               "refId": "B"
             }
           ],
@@ -8049,7 +8049,7 @@ data:
               "expr": "avg(rate(cilium_kubernetes_events_total{k8s_app=\"cilium\", scope=\"Endpoint\", pod=~\"$pod\"}[1m])) by (pod, action) * 60",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}'",
               "refId": "B"
             }
           ],
@@ -8148,7 +8148,7 @@ data:
               "expr": "avg(rate(cilium_kubernetes_events_total{k8s_app=\"cilium\", scope=\"Namespace\", pod=~\"$pod\"}[1m])) by (pod, action) * 60",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}}",
+              "legendFormat": "'{{"{{"}}action{{"}}"}}'",
               "refId": "B"
             }
           ],
@@ -8603,7 +8603,7 @@ data:
               "expr": "avg(cilium_operator_ipam_ips) by (type)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{type}}",
+              "legendFormat": "'{{"{{"}}type{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -8700,7 +8700,7 @@ data:
               "expr": "rate(cilium_operator_ec2_api_duration_seconds_sum[1m])/rate(cilium_operator_ec2_api_duration_seconds_count[1m])",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{operation}} {{response_code}}",
+              "legendFormat": "'{{"{{"}}operation{{"}}"}}' '{{"{{"}}response_code{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -8797,7 +8797,7 @@ data:
               "expr": "cilium_operator_ipam_nodes",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{category}}",
+              "legendFormat": "'{{"{{"}}category{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -9088,7 +9088,7 @@ data:
               "expr": "rate(cilium_operator_ec2_api_rate_limit_duration_seconds_sum[1m])/rate(cilium_operator_ec2_api_rate_limit_duration_seconds_count[1m])",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{operation}}",
+              "legendFormat": "'{{"{{"}}operation{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -9185,7 +9185,7 @@ data:
               "expr": "avg(rate(cilium_operator_ipam_interface_creation_ops[1m])) by (subnetId, status)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{status}} ({{subnetId}})",
+              "legendFormat": "'{{"{{"}}status{{"}}"}}' ('{{"{{"}}subnetId{{"}}"}}')",
               "refId": "A"
             }
           ],
@@ -9472,7 +9472,7 @@ data:
               "expr": "sum(rate(hubble_flows_processed_total[1m])) by (pod, type)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{type}}",
+              "legendFormat": "'{{"{{"}}type{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -9558,7 +9558,7 @@ data:
               "expr": "sum(rate(hubble_flows_processed_total{type=\"L7\"}[1m])) by (pod, subtype)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{subtype}}",
+              "legendFormat": "'{{"{{"}}subtype{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -9644,7 +9644,7 @@ data:
               "expr": "sum(rate(hubble_flows_processed_total{type=\"Trace\"}[1m])) by (pod, subtype)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{subtype}}",
+              "legendFormat": "'{{"{{"}}subtype{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -9743,7 +9743,7 @@ data:
               "expr": "sum(rate(hubble_flows_processed_total[1m])) by (pod, verdict)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{verdict}}",
+              "legendFormat": "'{{"{{"}}verdict{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -9829,7 +9829,7 @@ data:
               "expr": "sum(rate(hubble_drop_total[1m])) by (pod, reason)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{reason}}",
+              "legendFormat": "'{{"{{"}}reason{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -9916,7 +9916,7 @@ data:
               "expr": "sum (rate(hubble_port_distribution_total[1m])) by (pod, protocol)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{protocol}}",
+              "legendFormat": "'{{"{{"}}protocol{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -10008,7 +10008,7 @@ data:
               "expr": "topk(10, sum (rate(hubble_port_distribution_total{port!=\"0\"}[1m])) by (pod, port, protocol))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{port}}/{{protocol}}",
+              "legendFormat": "'{{"{{"}}port{{"}}"}}'/'{{"{{"}}protocol{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -10107,7 +10107,7 @@ data:
               "expr": "sum(rate(hubble_tcp_flags_total{family=\"IPv4\"}[1m])) by (pod, flag)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{flag}}",
+              "legendFormat": "'{{"{{"}}flag{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -10340,7 +10340,7 @@ data:
               "expr": "sum(rate(hubble_tcp_flags_total{family=\"IPv6\"}[1m])) by (pod, flag)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{flag}}",
+              "legendFormat": "'{{"{{"}}flag{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -10568,7 +10568,7 @@ data:
               "expr": "sum(rate(hubble_icmp_total{family=\"IPv4\"}[1m])) by (pod, type)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{type}}",
+              "legendFormat": "'{{"{{"}}type{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -10783,7 +10783,7 @@ data:
               "expr": "sum(rate(hubble_icmp_total{family=\"IPv6\"}[1m])) by (pod, type)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{type}}",
+              "legendFormat": "'{{"{{"}}type{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -10969,7 +10969,7 @@ data:
               "expr": "sum(rate(hubble_drop_total{reason=\"POLICY_DENIED\"}[1m])) by (pod, reason)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{reason}}",
+              "legendFormat": "'{{"{{"}}reason{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11055,7 +11055,7 @@ data:
               "expr": "sum(rate(hubble_drop_total{reason=\"POLICY_DENIED\"}[1m])) by (pod, protocol)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{protocol}}",
+              "legendFormat": "'{{"{{"}}protocol{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11141,7 +11141,7 @@ data:
               "expr": "topk(10, sum(rate(hubble_drop_total{reason=\"POLICY_DENIED\"}[1m])) by (pod, source))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{source}}",
+              "legendFormat": "'{{"{{"}}source{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11227,7 +11227,7 @@ data:
               "expr": "topk(10, sum(rate(hubble_drop_total{reason=\"POLICY_DENIED\"}[1m])) by (pod, destination))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{destination}}",
+              "legendFormat": "'{{"{{"}}destination{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11326,7 +11326,7 @@ data:
               "expr": "sum(rate(hubble_http_requests_total[1m])) by (pod, method)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}}",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11413,7 +11413,7 @@ data:
               "expr": "sum(rate(hubble_http_responses_total[1m])) by (pod, status)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{status}}",
+              "legendFormat": "'{{"{{"}}status{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11500,7 +11500,7 @@ data:
               "expr": "histogram_quantile(0.5, rate(hubble_http_request_duration_seconds_bucket[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}}",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11586,7 +11586,7 @@ data:
               "expr": "histogram_quantile(0.99, rate(hubble_http_request_duration_seconds_bucket[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}}",
+              "legendFormat": "'{{"{{"}}method{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11672,7 +11672,7 @@ data:
               "expr": "sum(rate(hubble_http_requests_total[5m])) by (pod, protocol)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{protocol}}",
+              "legendFormat": "'{{"{{"}}protocol{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11772,7 +11772,7 @@ data:
               "expr": "sum(rate(hubble_dns_queries_total[1m])) by (pod, qtypes)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{qtypes}}",
+              "legendFormat": "'{{"{{"}}qtypes{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11858,7 +11858,7 @@ data:
               "expr": "sum(rate(hubble_dns_responses_total{rcode=\"No Error\"}[1m])) by (pod, qtypes)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{qtypes}}",
+              "legendFormat": "'{{"{{"}}qtypes{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -11979,7 +11979,7 @@ data:
               "expr": "sum(rate(hubble_dns_queries_total[1m])) by (pod, qtypes) - sum(rate(hubble_dns_responses_total[1m])) by (pod, qtypes)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{qtypes}}",
+              "legendFormat": "'{{"{{"}}qtypes{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -12073,7 +12073,7 @@ data:
               "expr": "sum(rate(hubble_dns_response_types_total[1m])) by (pod, type)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{type}}",
+              "legendFormat": "'{{"{{"}}type{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -12160,7 +12160,7 @@ data:
               "expr": "sum(rate(hubble_dns_responses_total{rcode=\"No Error\"}[1m])) by (pod,ips_returned)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{ips_returned}}",
+              "legendFormat": "'{{"{{"}}ips_returned{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -12247,7 +12247,7 @@ data:
               "expr": "sum(rate(hubble_dns_responses_total{rcode!=\"No Error\"}[1m])) by (pod, qtypes, rcode)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{rcode}} ({{qtypes}})",
+              "legendFormat": "'{{"{{"}}rcode{{"}}"}}' ('{{"{{"}}qtypes{{"}}"}}')",
               "refId": "A"
             }
           ],
@@ -12337,7 +12337,7 @@ data:
               "expr": "topk(10,sum(rate(hubble_dns_responses_total{rcode!=\"No Error\"}[1m])) by (pod, destination))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{destination}}",
+              "legendFormat": "'{{"{{"}}destination{{"}}"}}'",
               "refId": "A"
             }
           ],
@@ -12428,7 +12428,7 @@ data:
               "expr": "topk(10, sum(rate(hubble_dns_queries_total[10m])*60) by (query, qtypes))",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{query}} ({{qtypes}})",
+              "legendFormat": "'{{"{{"}}query{{"}}"}}' ('{{"{{"}}qtypes{{"}}"}}')",
               "refId": "A"
             }
           ],
