@@ -1,4 +1,8 @@
 gitea:
+  postgresql-ha:
+    pgpool:
+      livenessProbe:
+        failureThreshold: 50
   ingress:
     enabled: true
     className: nginx
