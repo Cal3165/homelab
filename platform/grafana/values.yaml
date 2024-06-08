@@ -21,6 +21,8 @@ grafana:
   grafana.ini:
     server:
       root_url: https://grafana.notusa.uk
+    panels:
+      disable_sanitize_html: true
     auth.generic_oauth:
       enabled: true
       allow_sign_up: true
