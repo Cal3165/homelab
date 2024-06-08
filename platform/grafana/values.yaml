@@ -13,10 +13,10 @@ grafana:
   sidecar:
     dashboards:
       enabled: true
-      searchNamespace: monitoring-system
+      searchNamespace: ALL
     datasources:
       enabled: true
-      searchNamespace: monitoring-system
+      searchNamespace: ALL
   envFromSecret: grafana-secrets
   grafana.ini:
     server:
