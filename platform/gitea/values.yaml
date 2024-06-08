@@ -29,7 +29,7 @@ gitea:
           - *host
   gitea:
     admin:
-      existingSecret: gitea-admin-secret
+      existingSecret: gitea.admin
     config:
       server:
         LANDING_PAGE: explore
