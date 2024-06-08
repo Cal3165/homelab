@@ -18,18 +18,18 @@ blocky:
         main:
           port: 4000
           protocol: http
-    dnstcp:
-      enabled: true
-      type: LoadBalancer
-      externalTrafficPolicy: Local
-      annotations:
-        io.cilium/lb-ipam-ips: 10.0.10.30
-        io.cilium/lb-ipam-sharing-key: blocky-service
-      ports:
-        dnstcp:
-          enabled: true
-          port: 53
-          targetPort: 53
+    # dnstcp:
+    #   enabled: true
+    #   type: LoadBalancer
+    #   externalTrafficPolicy: Local
+    #   annotations:
+    #     io.cilium/lb-ipam-ips: 10.0.10.30
+    #     io.cilium/lb-ipam-sharing-key: blocky-service
+    #   ports:
+    #     dnstcp:
+    #       enabled: true
+    #       port: 53
+    #       targetPort: 53
     dnsudp:
       enabled: true
       type: LoadBalancer
