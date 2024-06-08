@@ -6,7 +6,7 @@ gitea:
     postgresql:
       livenessProbe:
         failureThreshold: 60
-      readynessProbe:
+      readinessProbe:
         failureThreshold: 60
   ingress:
     enabled: true
