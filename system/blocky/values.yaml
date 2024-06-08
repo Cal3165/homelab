@@ -8,54 +8,23 @@ blocky:
     type: postgresql
   service:
     main:
-      enabled: true
       type: LoadBalancer
       externalTrafficPolicy: Local
       annotations:
         io.cilium/lb-ipam-ips: 10.0.10.30
         io.cilium/lb-ipam-sharing-key: blocky-service
-      ports:
-        main:
-          port: 4000
-          protocol: http
-    # dnstcp:
-    #   enabled: true
-    #   type: LoadBalancer
-    #   externalTrafficPolicy: Local
-    #   annotations:
-    #     io.cilium/lb-ipam-ips: 10.0.10.30
-    #     io.cilium/lb-ipam-sharing-key: blocky-service
-    #   ports:
-    #     dnstcp:
-    #       enabled: true
-    #       port: 53
-    #       targetPort: 53
-    dnsudp:
-      enabled: true
+    dns:
       type: LoadBalancer
       externalTrafficPolicy: Local
       annotations:
         io.cilium/lb-ipam-ips: 10.0.10.30
         io.cilium/lb-ipam-sharing-key: blocky-service
-      ports:
-        dnsudp:
-          enabled: true
-          port: 53
-          protocol: udp
-          targetPort: 53
     dot:
-      enabled: true
       type: LoadBalancer
       externalTrafficPolicy: Local
       annotations:
         io.cilium/lb-ipam-ips: 10.0.10.30
         io.cilium/lb-ipam-sharing-key: blocky-service
-      ports:
-        dot:
-          enabled: true
-          port: 853
-          protocol: tcp
-          targetPort: 853
     https:
       enabled: true
       type: LoadBalancer
@@ -65,10 +34,8 @@ blocky:
         io.cilium/lb-ipam-sharing-key: blocky-service
       ports:
         https:
-          enabled: true
           port: 443
-          protocol: https
-          targetPort: 4443
+          targetPort: 443
     k8sgateway:
       enabled: true
       ports:
