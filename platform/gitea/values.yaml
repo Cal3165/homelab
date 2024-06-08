@@ -3,6 +3,9 @@ gitea:
     pgpool:
       livenessProbe:
         failureThreshold: 50
+    postgresql:
+      livenessProbe:
+        failureThreshold: 60
   ingress:
     enabled: true
     className: nginx
