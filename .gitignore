@@ -1,9 +1,11 @@
 .venv/
 book/
-
+cil
 *.iso
 *.log
 *.png
 *.tgz
 *kubeconfig.yaml
 Chart.lock
+cilium_command
+cilium.yaml
