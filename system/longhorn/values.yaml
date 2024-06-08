@@ -1,3 +1,5 @@
 longhorn:
-    persistence:
-      defaultClass: false
+  persistence:
+    defaultClass: false
+  preUpgradeChecker:
+    jobEnabled: false
