@@ -12,12 +12,12 @@ blocky:
       externalTrafficPolicy: Local
       annotations:
         io.cilium/lb-ipam-ips: 10.0.10.30
-        io.cilium/lb-ipam-sharing-key: blocky
+        lbipam.cilium.io/sharing-key: blocky
     dns:
       type: LoadBalancer
       externalTrafficPolicy: Local
       annotations:
-        io.cilium/lb-ipam-sharing-key: blocky
+        lbipam.cilium.io/sharing-key: blocky
       ports:
         dnstcp:
           enabled: false
@@ -25,13 +25,13 @@ blocky:
       type: LoadBalancer
       externalTrafficPolicy: Local
       annotations:
-        io.cilium/lb-ipam-sharing-key: blocky
+        lbipam.cilium.io/sharing-key: blocky
     https:
       enabled: true
       type: LoadBalancer
       externalTrafficPolicy: Local
       annotations:
-        io.cilium/lb-ipam-sharing-key: blocky
+        lbipam.cilium.io/sharing-key: blocky
       ports:
         https:
           port: 443
