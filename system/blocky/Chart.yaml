@@ -3,5 +3,5 @@ name: blocky
 version: 0.0.0
 dependencies:
   - name: blocky
-    version: 16.0.0
-    repository: oci://tccr.io/truecharts
+    version: "16.0.0"
+    repository: "oci://tccr.io/truecharts"
