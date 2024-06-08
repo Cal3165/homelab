@@ -5,6 +5,8 @@ gitea:
     enabled: true
     global:
       storageClass: nfs-csi-postgres
+    persistence:
+      storageClass: nfs-csi-postgres
     pgpool:
       livenessProbe:
         failureThreshold: 50
