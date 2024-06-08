@@ -16,7 +16,7 @@ metadata:
   namespace: cilium-monitoring
 data:
   cilium-dashboard.json: |
-    {
+    '{
       "annotations": {
         "list": [
           {
@@ -8260,7 +8260,7 @@ data:
       "title": "Cilium Metrics",
       "uid": "vtuWtdumz",
       "version": 1
-    }
+    }'
 ---
 # Source: prometheus/templates/grafana.yaml
 apiVersion: v1
