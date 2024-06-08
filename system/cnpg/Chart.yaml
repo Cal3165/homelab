@@ -1,0 +1,7 @@
+apiVersion: v2
+name: cloudnative-pg
+version: 0.0.0
+dependencies:
+  - name: cloudnative-pg
+    version: 7.0.5
+    repository: oci://tccr.io/truecharts

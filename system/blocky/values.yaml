@@ -1,293 +1,294 @@
-workload:
-  main:
-    type: DaemonSet
 blocky:
-  enablePrometheus: true
-queryLog:
-  type: console
-service:
-  main:
-    enabled: true
-    type: LoadBalancer
-    externalTrafficPolicy: Local
-    loadBalancerIP: 10.0.10.30
-    annotations:
-      metallb.universe.tf/allow-shared-ip: blocky-service
-    ports:
-      main:
-        port: 4000
-        protocol: http
-  dnstcp:
-    enabled: true
-    type: LoadBalancer
-    externalTrafficPolicy: Local
-    loadBalancerIP: 10.0.10.30
-    annotations:
-      metallb.universe.tf/allow-shared-ip: blocky-service
-    ports:
-      dnstcp:
-        enabled: true
-        port: 53
-        targetPort: 53
-  dnsudp:
-    enabled: true
-    type: LoadBalancer
-    externalTrafficPolicy: Local
-    loadBalancerIP: 10.0.10.30
-    annotations:
-      metallb.universe.tf/allow-shared-ip: blocky-service
-    ports:
-      dnsudp:
-        enabled: true
-        port: 53
-        protocol: udp
-        targetPort: 53
-  dot:
-    enabled: true
-    type: LoadBalancer
-    externalTrafficPolicy: Local
-    loadBalancerIP: 10.0.10.30
-    annotations:
-      metallb.universe.tf/allow-shared-ip: blocky-service
-    ports:
-      dot:
-        enabled: true
-        port: 853
-        protocol: tcp
-        targetPort: 853
-  https:
-    enabled: true
-    type: LoadBalancer
-    externalTrafficPolicy: Local
-    loadBalancerIP: 10.0.10.30
-    annotations:
-      metallb.universe.tf/allow-shared-ip: blocky-service
-    ports:
-      https:
-        enabled: true
-        port: 443
-        protocol: https
-        targetPort: 4443
+  workload:
+    main:
+      type: DaemonSet
+  blocky:
+    enablePrometheus: true
+  queryLog:
+    type: console
+  service:
+    main:
+      enabled: true
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      loadBalancerIP: 10.0.10.30
+      annotations:
+        metallb.universe.tf/allow-shared-ip: blocky-service
+      ports:
+        main:
+          port: 4000
+          protocol: http
+    dnstcp:
+      enabled: true
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      loadBalancerIP: 10.0.10.30
+      annotations:
+        metallb.universe.tf/allow-shared-ip: blocky-service
+      ports:
+        dnstcp:
+          enabled: true
+          port: 53
+          targetPort: 53
+    dnsudp:
+      enabled: true
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      loadBalancerIP: 10.0.10.30
+      annotations:
+        metallb.universe.tf/allow-shared-ip: blocky-service
+      ports:
+        dnsudp:
+          enabled: true
+          port: 53
+          protocol: udp
+          targetPort: 53
+    dot:
+      enabled: true
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      loadBalancerIP: 10.0.10.30
+      annotations:
+        metallb.universe.tf/allow-shared-ip: blocky-service
+      ports:
+        dot:
+          enabled: true
+          port: 853
+          protocol: tcp
+          targetPort: 853
+    https:
+      enabled: true
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      loadBalancerIP: 10.0.10.30
+      annotations:
+        metallb.universe.tf/allow-shared-ip: blocky-service
+      ports:
+        https:
+          enabled: true
+          port: 443
+          protocol: https
+          targetPort: 4443
+    k8sgateway:
+      enabled: true
+      ports:
+        k8sgateway:
+          enabled: true
+          port: 5353
+          protocol: udp
+          targetPort: 5353
+  certificate:
+    blocky-cert:
+      enabled: true
+      hosts:
+      - dns.notusa.uk
+      certificateIssuer: cloudflare-issuer
+  persistence:
+    cert-file:
+      enabled: true
+      type: secret
+      mountPath: /certs
+      objectName: blocky-cert
+      optional: true
+      items:
+      - key: tls.crt
+        path: server.crt
+      - key: tls.key
+        path: server.key
   k8sgateway:
     enabled: true
-    ports:
-      k8sgateway:
+    domains:
+    - domain: "notusa.uk"
+      dnsChallenge:
         enabled: true
-        port: 5353
-        protocol: udp
-        targetPort: 5353
-certificate:
-  blocky-cert:
-    enabled: true
-    hosts:
-    - dns.notusa.uk
-    certificateIssuer: cloudflare-issuer
-persistence:
-  cert-file:
-    enabled: true
-    type: secret
-    mountPath: /certs
-    objectName: blocky-cert
-    optional: true
-    items:
-    - key: tls.crt
-      path: server.crt
-    - key: tls.key
-      path: server.key
-k8sgateway:
-  enabled: true
-  domains:
-  - domain: "notusa.uk"
-    dnsChallenge:
+        domain: dns01.clouddns.com
+    forward:
+      enabled: false
+      primary: tls://1.1.1.1
+      secondary: tls://1.0.0.1
+      options:
+      - name: tls_servername
+        value: cloudflare-dns.com
+  metrics:
+    main:
       enabled: true
-      domain: dns01.clouddns.com
-  forward:
-    enabled: false
-    primary: tls://1.1.1.1
-    secondary: tls://1.0.0.1
-    options:
-    - name: tls_servername
-      value: cloudflare-dns.com
-metrics:
-  main:
-    enabled: true
-    prometheusRule:
-      enabled: true
-cnpg:
-  main:
-    enabled: false
-#     cluster:
-#       storage:
-#         storageClass: longhorn
-#         size: 5Gi
-#       walStorage:
-#         storageClass: longhorn
-#         size: 5Gi
-#     backups:
-#       enabled: true
-#       endpointURL: "http://minio-minio-api.minio.svc.cluster.local"
-#       provider: s3
-#       s3:
-#         path: "/blocky"
-#         bucket: "cpng-backup"
-#       scheduledBackups:
-#       - name: daily-backup
-#         schedule: "0 0 0 * * *"
-#         backupOwnerReference: self
-#         immediate: false
-#         suspend: false
-blockyConfig:
-  upstreams:
-    groups:
-      # these external DNS resolvers will be used. Blocky picks 2 random resolvers from the list for each query
-      # format for resolver: [net:]host:[port][/path]. net could be empty (default, shortcut for tcp+udp), tcp+udp, tcp, udp, tcp-tls or https (DoH). If port is empty, default port will be used (53 for udp and tcp, 853 for tcp-tls, 443 for https (Doh))
-      # this configuration is mandatory, please define at least one external DNS resolver
-      # default:
-      # # cloudflare
-      # - 1.1.1.1
-      # - 1.0.0.1
-      # # google
-      # - 8.8.4.4
-      # - 8.8.8.8
-      # # quad nine
-      # - 9.9.9.9
-      # - 149.112.112.112
-      default:
-      - https://base.dns.mullvad.net/dns-query
-      - https://freedns.controld.com/p2
-      - https://dns.adguard-dns.com/dns-query
-  bootstrapDns:
-  - upstream: https://unfiltered.adguard-dns.com/dns-query
-    ips:
-    - 94.140.14.140
-    - 94.140.14.141
-  - upstream: https://freedns.controld.com/p0
-    ips:
-    - 76.76.2.0
-    - 76.76.10.0
-  - upstream: https://dns.quad9.net/dns-query
-    ips:
-    - 9.9.9.9
-    - 149.112.112.112
-  - upstream: https://dns.mullvad.net/dns-query
-    ips:
-    - 194.242.2.2
-  certFile: "/certs/server.crt"
-  keyFile: "/certs/server.key"
-  connectIPVersion: v4
-  prometheus:
-    enable: true
-    path: /metrics
-  caching:
-    minTime: 5m
-    maxTime: 300m
-    maxItemsCount: 0
-    prefetching: true
-    prefetchExpires: 5h
-    prefetchThreshold: 3
-    prefetchMaxItemsCount: 0
-    cacheTimeNegative: 30m
-  blocking:
-    blackLists:
-      ads:
-      - https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt
-      - https://adaway.org/hosts.txt
-      - https://v.firebog.net/hosts/AdguardDNS.txt
-      - https://v.firebog.net/hosts/Admiral.txt
-      - https://v.firebog.net/hosts/Easylist.txt
-      - https://v.firebog.net/hosts/static/w3kbl.txt
-      - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
-      - https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
-      - https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
-      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts
-      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts
-      - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews/hosts
-      - https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
-      - https://big.oisd.nl/domainswild2
-      - https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
-      - https://blocklistproject.github.io/Lists/ads.txt
-      - |
-        *.skyadsmart.com
-    clientGroupsBlock:
-      default:
-      - ads
-    loading:
-      concurrency: 10
-      downloads:
-        timeout: 180s
-  queryLog:
-    type: "console"
-  customDNS:
-    customTTL: 1h
-    filterUnmappedTypes: true
-    mapping:
-      dns.notusa.uk: 10.0.10.30
-      nas.notusa.uk: 10.0.0.11
-      proxmox1.notusa.uk: 10.0.0.100
-      proxmox2.notusa.uk: 10.0.0.101
-      proxmox3.notusa.uk: 10.0.0.102
-      proxmox4.notusa.uk: 10.0.0.103
-      wifi.notusa.uk: 192.168.0.2
-      switch.notusa.uk: 192.168.0.100
-      router.notusa.uk: 192.168.0.1
-      blizzard.vo.llnwd.net: 10.0.10.2
-      blzddist1-a.akamaihd.net: 10.0.10.2
-      blzddist2-a.akamaihd.net: 10.0.10.2
-      blzddist3-a.akamaihd.net: 10.0.10.2
-      cdn.blizzard.com: 10.0.10.2
-      dist.blizzard.com: 10.0.10.2
-      dist.blizzard.com.edgesuite.net: 10.0.10.2
-      edge.blizzard.top.comcast.net: 10.0.10.2
-      level3.blizzard.com: 10.0.10.2
-      nydus.battle.net: 10.0.10.2
-      cdn1.epicgames.com: 10.0.10.2
-      cdn1.unrealengine.com: 10.0.10.2
-      cdn2.unrealengine.com: 10.0.10.2
-      cdn3.unrealengine.com: 10.0.10.2
-      cdn.unrealengine.com: 10.0.10.2
-      download2.epicgames.com: 10.0.10.2
-      download3.epicgames.com: 10.0.10.2
-      download4.epicgames.com: 10.0.10.2
-      download.epicgames.com: 10.0.10.2
-      epicgames-download1.akamaized.net: 10.0.10.2
-      fastly-download.epicgames.com: 10.0.10.2
-      ccs.cdn.wup.shop.nintendo.net: 10.0.10.2
-      ccs.cdn.wup.shop.nintendo.net.edgesuite.net: 10.0.10.2
-      ecs-lp1.hac.shop.nintendo.net: 10.0.10.2
-      geisha-wup.cdn.nintendo.net: 10.0.10.2
-      geisha-wup.cdn.nintendo.net.edgekey.net: 10.0.10.2
-      .hac.lp1.d4c.nintendo.net: 10.0.10.2
-      .hac.lp1.eshop.nintendo.net: 10.0.10.2
-      idbe-wup.cdn.nintendo.net: 10.0.10.2
-      idbe-wup.cdn.nintendo.net.edgekey.net: 10.0.10.2
-      receive-lp1.dg.srv.nintendo.net: 10.0.10.2
-      .wup.eshop.nintendo.net: 10.0.10.2
-      cdn-patch.swtor.com: 10.0.10.2
-      lvlt.cdn.ea.com: 10.0.10.2
-      origin-a.akamaihd.net: 10.0.10.2
-      .dyn.riotcdn.net: 10.0.10.2
-      l3cdn.riotgames.com: 10.0.10.2
-      riotgamespatcher-a.akamaihd.net: 10.0.10.2
-      riotgamespatcher-a.akamaihd.net.edgesuite.net: 10.0.10.2
-      worldwide.l3cdn.riotgames.com: 10.0.10.2
-      .gs2.sonycoment.loris-e.llnwd.net: 10.0.10.2
-      gs2.ww.prod.dl.playstation.net: 10.0.10.2
-      gs2.ww.prod.dl.playstation.net.edgesuite.net: 10.0.10.2
-      gs2-ww-prod.psn.akadns.net: 10.0.10.2
-      gs-sec.ww.np.dl.playstation.net: 10.0.10.2
-      playstation4.sony.akadns.net: 10.0.10.2
-      theia.dl.playstation.net: 10.0.10.2
-      tmdb.np.dl.playstation.net: 10.0.10.2
-      lancache.steamcontent.com: 10.0.10.2
-      .cdn.ubi.com: 10.0.10.2
-      amupdatedl2.microsoft.com: 10.0.10.2
-      amupdatedl3.microsoft.com: 10.0.10.2
-      amupdatedl4.microsoft.com: 10.0.10.2
-      amupdatedl5.microsoft.com: 10.0.10.2
-      amupdatedl.microsoft.com: 10.0.10.2
-      dl.delivery.mp.microsoft.com: 10.0.10.2
-      .do.dsp.mp.microsoft.com: 10.0.10.2
-      .microsoft.com.edgesuite.net: 10.0.10.2
-      .update.microsoft.com: 10.0.10.2
-      .windowsupdate.com: 10.0.10.2
+      prometheusRule:
+        enabled: true
+  cnpg:
+    main:
+      enabled: false
+  #     cluster:
+  #       storage:
+  #         storageClass: longhorn
+  #         size: 5Gi
+  #       walStorage:
+  #         storageClass: longhorn
+  #         size: 5Gi
+  #     backups:
+  #       enabled: true
+  #       endpointURL: "http://minio-minio-api.minio.svc.cluster.local"
+  #       provider: s3
+  #       s3:
+  #         path: "/blocky"
+  #         bucket: "cpng-backup"
+  #       scheduledBackups:
+  #       - name: daily-backup
+  #         schedule: "0 0 0 * * *"
+  #         backupOwnerReference: self
+  #         immediate: false
+  #         suspend: false
+  blockyConfig:
+    upstreams:
+      groups:
+        # these external DNS resolvers will be used. Blocky picks 2 random resolvers from the list for each query
+        # format for resolver: [net:]host:[port][/path]. net could be empty (default, shortcut for tcp+udp), tcp+udp, tcp, udp, tcp-tls or https (DoH). If port is empty, default port will be used (53 for udp and tcp, 853 for tcp-tls, 443 for https (Doh))
+        # this configuration is mandatory, please define at least one external DNS resolver
+        # default:
+        # # cloudflare
+        # - 1.1.1.1
+        # - 1.0.0.1
+        # # google
+        # - 8.8.4.4
+        # - 8.8.8.8
+        # # quad nine
+        # - 9.9.9.9
+        # - 149.112.112.112
+        default:
+        - https://base.dns.mullvad.net/dns-query
+        - https://freedns.controld.com/p2
+        - https://dns.adguard-dns.com/dns-query
+    bootstrapDns:
+    - upstream: https://unfiltered.adguard-dns.com/dns-query
+      ips:
+      - 94.140.14.140
+      - 94.140.14.141
+    - upstream: https://freedns.controld.com/p0
+      ips:
+      - 76.76.2.0
+      - 76.76.10.0
+    - upstream: https://dns.quad9.net/dns-query
+      ips:
+      - 9.9.9.9
+      - 149.112.112.112
+    - upstream: https://dns.mullvad.net/dns-query
+      ips:
+      - 194.242.2.2
+    certFile: "/certs/server.crt"
+    keyFile: "/certs/server.key"
+    connectIPVersion: v4
+    prometheus:
+      enable: true
+      path: /metrics
+    caching:
+      minTime: 5m
+      maxTime: 300m
+      maxItemsCount: 0
+      prefetching: true
+      prefetchExpires: 5h
+      prefetchThreshold: 3
+      prefetchMaxItemsCount: 0
+      cacheTimeNegative: 30m
+    blocking:
+      blackLists:
+        ads:
+        - https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt
+        - https://adaway.org/hosts.txt
+        - https://v.firebog.net/hosts/AdguardDNS.txt
+        - https://v.firebog.net/hosts/Admiral.txt
+        - https://v.firebog.net/hosts/Easylist.txt
+        - https://v.firebog.net/hosts/static/w3kbl.txt
+        - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+        - https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
+        - https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
+        - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts
+        - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts
+        - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews/hosts
+        - https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
+        - https://big.oisd.nl/domainswild2
+        - https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
+        - https://blocklistproject.github.io/Lists/ads.txt
+        - |
+          *.skyadsmart.com
+      clientGroupsBlock:
+        default:
+        - ads
+      loading:
+        concurrency: 10
+        downloads:
+          timeout: 180s
+    queryLog:
+      type: "console"
+    customDNS:
+      customTTL: 1h
+      filterUnmappedTypes: true
+      mapping:
+        dns.notusa.uk: 10.0.10.30
+        nas.notusa.uk: 10.0.0.11
+        proxmox1.notusa.uk: 10.0.0.100
+        proxmox2.notusa.uk: 10.0.0.101
+        proxmox3.notusa.uk: 10.0.0.102
+        proxmox4.notusa.uk: 10.0.0.103
+        wifi.notusa.uk: 192.168.0.2
+        switch.notusa.uk: 192.168.0.100
+        router.notusa.uk: 192.168.0.1
+        blizzard.vo.llnwd.net: 10.0.10.2
+        blzddist1-a.akamaihd.net: 10.0.10.2
+        blzddist2-a.akamaihd.net: 10.0.10.2
+        blzddist3-a.akamaihd.net: 10.0.10.2
+        cdn.blizzard.com: 10.0.10.2
+        dist.blizzard.com: 10.0.10.2
+        dist.blizzard.com.edgesuite.net: 10.0.10.2
+        edge.blizzard.top.comcast.net: 10.0.10.2
+        level3.blizzard.com: 10.0.10.2
+        nydus.battle.net: 10.0.10.2
+        cdn1.epicgames.com: 10.0.10.2
+        cdn1.unrealengine.com: 10.0.10.2
+        cdn2.unrealengine.com: 10.0.10.2
+        cdn3.unrealengine.com: 10.0.10.2
+        cdn.unrealengine.com: 10.0.10.2
+        download2.epicgames.com: 10.0.10.2
+        download3.epicgames.com: 10.0.10.2
+        download4.epicgames.com: 10.0.10.2
+        download.epicgames.com: 10.0.10.2
+        epicgames-download1.akamaized.net: 10.0.10.2
+        fastly-download.epicgames.com: 10.0.10.2
+        ccs.cdn.wup.shop.nintendo.net: 10.0.10.2
+        ccs.cdn.wup.shop.nintendo.net.edgesuite.net: 10.0.10.2
+        ecs-lp1.hac.shop.nintendo.net: 10.0.10.2
+        geisha-wup.cdn.nintendo.net: 10.0.10.2
+        geisha-wup.cdn.nintendo.net.edgekey.net: 10.0.10.2
+        .hac.lp1.d4c.nintendo.net: 10.0.10.2
+        .hac.lp1.eshop.nintendo.net: 10.0.10.2
+        idbe-wup.cdn.nintendo.net: 10.0.10.2
+        idbe-wup.cdn.nintendo.net.edgekey.net: 10.0.10.2
+        receive-lp1.dg.srv.nintendo.net: 10.0.10.2
+        .wup.eshop.nintendo.net: 10.0.10.2
+        cdn-patch.swtor.com: 10.0.10.2
+        lvlt.cdn.ea.com: 10.0.10.2
+        origin-a.akamaihd.net: 10.0.10.2
+        .dyn.riotcdn.net: 10.0.10.2
+        l3cdn.riotgames.com: 10.0.10.2
+        riotgamespatcher-a.akamaihd.net: 10.0.10.2
+        riotgamespatcher-a.akamaihd.net.edgesuite.net: 10.0.10.2
+        worldwide.l3cdn.riotgames.com: 10.0.10.2
+        .gs2.sonycoment.loris-e.llnwd.net: 10.0.10.2
+        gs2.ww.prod.dl.playstation.net: 10.0.10.2
+        gs2.ww.prod.dl.playstation.net.edgesuite.net: 10.0.10.2
+        gs2-ww-prod.psn.akadns.net: 10.0.10.2
+        gs-sec.ww.np.dl.playstation.net: 10.0.10.2
+        playstation4.sony.akadns.net: 10.0.10.2
+        theia.dl.playstation.net: 10.0.10.2
+        tmdb.np.dl.playstation.net: 10.0.10.2
+        lancache.steamcontent.com: 10.0.10.2
+        .cdn.ubi.com: 10.0.10.2
+        amupdatedl2.microsoft.com: 10.0.10.2
+        amupdatedl3.microsoft.com: 10.0.10.2
+        amupdatedl4.microsoft.com: 10.0.10.2
+        amupdatedl5.microsoft.com: 10.0.10.2
+        amupdatedl.microsoft.com: 10.0.10.2
+        dl.delivery.mp.microsoft.com: 10.0.10.2
+        .do.dsp.mp.microsoft.com: 10.0.10.2
+        .microsoft.com.edgesuite.net: 10.0.10.2
+        .update.microsoft.com: 10.0.10.2
+        .windowsupdate.com: 10.0.10.2
 
