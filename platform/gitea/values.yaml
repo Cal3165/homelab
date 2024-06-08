@@ -1,5 +1,8 @@
 gitea:
+  postgresql:
+    enabled: true
   postgresql-ha:
+    enabled: false
     pgpool:
       livenessProbe:
         failureThreshold: 50
