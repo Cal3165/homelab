@@ -11,9 +11,9 @@ blocky:
       enabled: true
       type: LoadBalancer
       externalTrafficPolicy: Local
-      loadBalancerIP: 10.0.10.30
       annotations:
-        metallb.universe.tf/allow-shared-ip: blocky-service
+        io.cilium/lb-ipam-ips: 10.0.10.30
+        io.cilium/lb-ipam-sharing-key: blocky-service
       ports:
         main:
           port: 4000
@@ -22,9 +22,9 @@ blocky:
       enabled: true
       type: LoadBalancer
       externalTrafficPolicy: Local
-      loadBalancerIP: 10.0.10.30
       annotations:
-        metallb.universe.tf/allow-shared-ip: blocky-service
+        io.cilium/lb-ipam-ips: 10.0.10.30
+        io.cilium/lb-ipam-sharing-key: blocky-service
       ports:
         dnstcp:
           enabled: true
@@ -34,9 +34,9 @@ blocky:
       enabled: true
       type: LoadBalancer
       externalTrafficPolicy: Local
-      loadBalancerIP: 10.0.10.30
       annotations:
-        metallb.universe.tf/allow-shared-ip: blocky-service
+        io.cilium/lb-ipam-ips: 10.0.10.30
+        io.cilium/lb-ipam-sharing-key: blocky-service
       ports:
         dnsudp:
           enabled: true
@@ -47,8 +47,8 @@ blocky:
       enabled: true
       type: LoadBalancer
       externalTrafficPolicy: Local
-      loadBalancerIP: 10.0.10.30
       annotations:
+        io.cilium/lb-ipam-ips: 10.0.10.30
         metallb.universe.tf/allow-shared-ip: blocky-service
       ports:
         dot:
@@ -60,9 +60,9 @@ blocky:
       enabled: true
       type: LoadBalancer
       externalTrafficPolicy: Local
-      loadBalancerIP: 10.0.10.30
       annotations:
-        metallb.universe.tf/allow-shared-ip: blocky-service
+        io.cilium/lb-ipam-ips: 10.0.10.30
+        io.cilium/lb-ipam-sharing-key: blocky-service
       ports:
         https:
           enabled: true
