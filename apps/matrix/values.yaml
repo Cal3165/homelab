@@ -36,3 +36,6 @@ dendrite:
         secretName: matrix-tls-certificate
   postgresql:
     enabled: true
+    primary:
+      persistence:
+        storageClass: longhorn
