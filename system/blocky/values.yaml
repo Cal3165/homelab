@@ -21,7 +21,7 @@ blocky:
         lbipam.cilium.io/sharing-key: blocky
       ports:
         dnstcp:
-          enabled: false
+          enabled: true
     dot:
       type: LoadBalancer
       externalTrafficPolicy: Local
