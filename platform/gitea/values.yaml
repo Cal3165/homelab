@@ -2,9 +2,9 @@ gitea:
   postgresql-ha:
     enabled: true
     global:
-      storageClass: nfs-csi-postgres
+      storageClass: longhorn
     persistence:
-      storageClass: nfs-csi-postgres
+      storageClass: longhorn
     pgpool:
       livenessProbe:
         failureThreshold: 50
