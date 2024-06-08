@@ -201,64 +201,64 @@ blocky:
         wifi.notusa.uk: 192.168.0.2
         switch.notusa.uk: 192.168.0.100
         router.notusa.uk: 192.168.0.1
-        blizzard.vo.llnwd.net: 10.0.10.2
-        blzddist1-a.akamaihd.net: 10.0.10.2
-        blzddist2-a.akamaihd.net: 10.0.10.2
-        blzddist3-a.akamaihd.net: 10.0.10.2
-        cdn.blizzard.com: 10.0.10.2
-        dist.blizzard.com: 10.0.10.2
-        dist.blizzard.com.edgesuite.net: 10.0.10.2
-        edge.blizzard.top.comcast.net: 10.0.10.2
-        level3.blizzard.com: 10.0.10.2
-        nydus.battle.net: 10.0.10.2
-        cdn1.epicgames.com: 10.0.10.2
-        cdn1.unrealengine.com: 10.0.10.2
-        cdn2.unrealengine.com: 10.0.10.2
-        cdn3.unrealengine.com: 10.0.10.2
-        cdn.unrealengine.com: 10.0.10.2
-        download2.epicgames.com: 10.0.10.2
-        download3.epicgames.com: 10.0.10.2
-        download4.epicgames.com: 10.0.10.2
-        download.epicgames.com: 10.0.10.2
-        epicgames-download1.akamaized.net: 10.0.10.2
-        fastly-download.epicgames.com: 10.0.10.2
-        ccs.cdn.wup.shop.nintendo.net: 10.0.10.2
-        ccs.cdn.wup.shop.nintendo.net.edgesuite.net: 10.0.10.2
-        ecs-lp1.hac.shop.nintendo.net: 10.0.10.2
-        geisha-wup.cdn.nintendo.net: 10.0.10.2
-        geisha-wup.cdn.nintendo.net.edgekey.net: 10.0.10.2
-        .hac.lp1.d4c.nintendo.net: 10.0.10.2
-        .hac.lp1.eshop.nintendo.net: 10.0.10.2
-        idbe-wup.cdn.nintendo.net: 10.0.10.2
-        idbe-wup.cdn.nintendo.net.edgekey.net: 10.0.10.2
-        receive-lp1.dg.srv.nintendo.net: 10.0.10.2
-        .wup.eshop.nintendo.net: 10.0.10.2
-        cdn-patch.swtor.com: 10.0.10.2
-        lvlt.cdn.ea.com: 10.0.10.2
-        origin-a.akamaihd.net: 10.0.10.2
-        .dyn.riotcdn.net: 10.0.10.2
-        l3cdn.riotgames.com: 10.0.10.2
-        riotgamespatcher-a.akamaihd.net: 10.0.10.2
-        riotgamespatcher-a.akamaihd.net.edgesuite.net: 10.0.10.2
-        worldwide.l3cdn.riotgames.com: 10.0.10.2
-        .gs2.sonycoment.loris-e.llnwd.net: 10.0.10.2
-        gs2.ww.prod.dl.playstation.net: 10.0.10.2
-        gs2.ww.prod.dl.playstation.net.edgesuite.net: 10.0.10.2
-        gs2-ww-prod.psn.akadns.net: 10.0.10.2
-        gs-sec.ww.np.dl.playstation.net: 10.0.10.2
-        playstation4.sony.akadns.net: 10.0.10.2
-        theia.dl.playstation.net: 10.0.10.2
-        tmdb.np.dl.playstation.net: 10.0.10.2
-        lancache.steamcontent.com: 10.0.10.2
-        .cdn.ubi.com: 10.0.10.2
-        amupdatedl2.microsoft.com: 10.0.10.2
-        amupdatedl3.microsoft.com: 10.0.10.2
-        amupdatedl4.microsoft.com: 10.0.10.2
-        amupdatedl5.microsoft.com: 10.0.10.2
-        amupdatedl.microsoft.com: 10.0.10.2
-        dl.delivery.mp.microsoft.com: 10.0.10.2
-        .do.dsp.mp.microsoft.com: 10.0.10.2
-        .microsoft.com.edgesuite.net: 10.0.10.2
-        .update.microsoft.com: 10.0.10.2
-        .windowsupdate.com: 10.0.10.2
+        # blizzard.vo.llnwd.net: 10.0.10.2
+        # blzddist1-a.akamaihd.net: 10.0.10.2
+        # blzddist2-a.akamaihd.net: 10.0.10.2
+        # blzddist3-a.akamaihd.net: 10.0.10.2
+        # cdn.blizzard.com: 10.0.10.2
+        # dist.blizzard.com: 10.0.10.2
+        # dist.blizzard.com.edgesuite.net: 10.0.10.2
+        # edge.blizzard.top.comcast.net: 10.0.10.2
+        # level3.blizzard.com: 10.0.10.2
+        # nydus.battle.net: 10.0.10.2
+        # cdn1.epicgames.com: 10.0.10.2
+        # cdn1.unrealengine.com: 10.0.10.2
+        # cdn2.unrealengine.com: 10.0.10.2
+        # cdn3.unrealengine.com: 10.0.10.2
+        # cdn.unrealengine.com: 10.0.10.2
+        # download2.epicgames.com: 10.0.10.2
+        # download3.epicgames.com: 10.0.10.2
+        # download4.epicgames.com: 10.0.10.2
+        # download.epicgames.com: 10.0.10.2
+        # epicgames-download1.akamaized.net: 10.0.10.2
+        # fastly-download.epicgames.com: 10.0.10.2
+        # ccs.cdn.wup.shop.nintendo.net: 10.0.10.2
+        # ccs.cdn.wup.shop.nintendo.net.edgesuite.net: 10.0.10.2
+        # ecs-lp1.hac.shop.nintendo.net: 10.0.10.2
+        # geisha-wup.cdn.nintendo.net: 10.0.10.2
+        # geisha-wup.cdn.nintendo.net.edgekey.net: 10.0.10.2
+        # .hac.lp1.d4c.nintendo.net: 10.0.10.2
+        # .hac.lp1.eshop.nintendo.net: 10.0.10.2
+        # idbe-wup.cdn.nintendo.net: 10.0.10.2
+        # idbe-wup.cdn.nintendo.net.edgekey.net: 10.0.10.2
+        # receive-lp1.dg.srv.nintendo.net: 10.0.10.2
+        # .wup.eshop.nintendo.net: 10.0.10.2
+        # cdn-patch.swtor.com: 10.0.10.2
+        # lvlt.cdn.ea.com: 10.0.10.2
+        # origin-a.akamaihd.net: 10.0.10.2
+        # .dyn.riotcdn.net: 10.0.10.2
+        # l3cdn.riotgames.com: 10.0.10.2
+        # riotgamespatcher-a.akamaihd.net: 10.0.10.2
+        # riotgamespatcher-a.akamaihd.net.edgesuite.net: 10.0.10.2
+        # worldwide.l3cdn.riotgames.com: 10.0.10.2
+        # .gs2.sonycoment.loris-e.llnwd.net: 10.0.10.2
+        # gs2.ww.prod.dl.playstation.net: 10.0.10.2
+        # gs2.ww.prod.dl.playstation.net.edgesuite.net: 10.0.10.2
+        # gs2-ww-prod.psn.akadns.net: 10.0.10.2
+        # gs-sec.ww.np.dl.playstation.net: 10.0.10.2
+        # playstation4.sony.akadns.net: 10.0.10.2
+        # theia.dl.playstation.net: 10.0.10.2
+        # tmdb.np.dl.playstation.net: 10.0.10.2
+        # lancache.steamcontent.com: 10.0.10.2
+        # .cdn.ubi.com: 10.0.10.2
+        # amupdatedl2.microsoft.com: 10.0.10.2
+        # amupdatedl3.microsoft.com: 10.0.10.2
+        # amupdatedl4.microsoft.com: 10.0.10.2
+        # amupdatedl5.microsoft.com: 10.0.10.2
+        # amupdatedl.microsoft.com: 10.0.10.2
+        # dl.delivery.mp.microsoft.com: 10.0.10.2
+        # .do.dsp.mp.microsoft.com: 10.0.10.2
+        # .microsoft.com.edgesuite.net: 10.0.10.2
+        # .update.microsoft.com: 10.0.10.2
+        # .windowsupdate.com: 10.0.10.2
 
