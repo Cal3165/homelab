@@ -5,7 +5,7 @@ blocky:
   blocky:
     enablePrometheus: true
   queryLog:
-    type: console
+    type: postgresql
   service:
     main:
       enabled: true
@@ -116,14 +116,14 @@ blocky:
         enabled: true
   cnpg:
     main:
-      enabled: false
-  #     cluster:
-  #       storage:
-  #         storageClass: longhorn
-  #         size: 5Gi
-  #       walStorage:
-  #         storageClass: longhorn
-  #         size: 5Gi
+      enabled: true
+      cluster:
+        storage:
+          storageClass: longhorn
+          size: 5Gi
+        walStorage:
+          storageClass: longhorn
+          size: 5Gi
   #     backups:
   #       enabled: true
   #       endpointURL: "http://minio-minio-api.minio.svc.cluster.local"
