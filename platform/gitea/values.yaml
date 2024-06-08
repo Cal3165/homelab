@@ -1,6 +1,4 @@
 gitea:
-  postgresql:
-    enabled: false
   postgresql-ha:
     enabled: true
     global:
