@@ -13,7 +13,7 @@ metadata:
     app: grafana
     grafana_dashboard: "1"
   name: grafana-cilium-dashboard
-  namespace: cilium-monitoring
+  namespace: {{ .Release.Namespace }}
 data:
   cilium-dashboard.json: |
     {
@@ -8270,7 +8270,7 @@ metadata:
     app: grafana
     grafana_dashboard: "1"
   name: grafana-cilium-operator-dashboard
-  namespace: cilium-monitoring
+  namespace: {{ .Release.Namespace }}
 data:
   cilium-operator-dashboard.json: |
     {
@@ -9280,7 +9280,7 @@ metadata:
     app: grafana
     grafana_dashboard: "1"
   name: grafana-hubble-dashboard
-  namespace: cilium-monitoring
+  namespace: {{ .Release.Namespace }}
 data:
   hubble-dashboard.json: |
     {
@@ -12524,7 +12524,7 @@ metadata:
     app: grafana
     grafana_dashboard: "1"
   name: grafana-hubble-l7-http-metrics-by-workload
-  namespace: cilium-monitoring
+  namespace: {{ .Release.Namespace }}
 data:
   hubble-l7-http-metrics-by-workload.json: |
     {
