@@ -49,7 +49,7 @@ blocky:
       externalTrafficPolicy: Local
       annotations:
         io.cilium/lb-ipam-ips: 10.0.10.30
-        metallb.universe.tf/allow-shared-ip: blocky-service
+        io.cilium/lb-ipam-sharing-key: blocky-service
       ports:
         dot:
           enabled: true
