@@ -26,4 +26,4 @@ spec:
       volumes:
         - name: source
           configMap:
-            name: secret-generator
+            name: secret-generator-
