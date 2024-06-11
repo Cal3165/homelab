@@ -1,0 +1,7 @@
+apiVersion: v2
+name: flux
+version: 0.0.0
+dependencies:
+  - name: flux
+    version: 6.4.1
+    repository: oci://ghcr.io/fluxcd-community/charts/flux2
