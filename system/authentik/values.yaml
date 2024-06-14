@@ -29,7 +29,7 @@ authentik:
   geoip:
     enabled: true
     existingSecret:
-      name: authentik-secrets
+      secretName: authentik-secrets
       accountId: geoip_accountID
       licenseKey: geoip_licenseKey
 
