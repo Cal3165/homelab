@@ -1,5 +1,5 @@
 module "grafana" {
-  source = "./odic_app"
+  source = "./modules/odic_app"
   app_name = "Grafana"
   app_client_id = var.grafana_client_id
   app_redirect_uris = [var.grafana_redirect_uri]
@@ -9,12 +9,12 @@ module "grafana" {
     data.authentik_scope_mapping.scope-openid.id,
   ]
   app_admin_group = "Grafana Admins"
-  app_admin_users = [akadmin.name.id,Caleb.name.id]
+  app_admin_users = [data.authentik_user.akadmin.id, authentik_user.caleb.id]
   app_groups = ["Grafana Editors", "Grafana Viewers"]
 }
 
 module "argocd" {
-  source = "./odic_app"
+  source = "./modules/odic_app"
   app_name = "ArgoCD"
   app_client_id = var.argocd_client_id
   app_redirect_uris = [
@@ -27,6 +27,6 @@ module "argocd" {
     data.authentik_scope_mapping.scope-openid.id,
   ]
   app_admin_group = "ArgoCD Admins"
-  app_admin_users = [akadmin.name.id]
+  app_admin_users = [data.authentik_user.akadmin.id, authentik_user.caleb.id]
   app_groups = ["ArgoCD Viewers"]
 }
