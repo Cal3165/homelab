@@ -35,7 +35,7 @@ authentik:
 
   redis:
     enabled: true
-  postgress:
+  postgresql:
     enabled: true
     primary:
       persistence:
