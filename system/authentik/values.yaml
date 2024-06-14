@@ -6,6 +6,11 @@ authentik:
           secretKeyRef:
             name: authentik-secrets
             key: authentik_token
+      - name: AUTHENTIK_SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            name: authentik-secret-key
+            key: secret_key
     startupProbe:
       initialDelaySeconds: 60
       failureThreshold: 240
