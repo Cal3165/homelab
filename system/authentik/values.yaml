@@ -6,10 +6,15 @@ authentik:
           secretKeyRef:
             name: authentik-secrets
             key: authentik_token
+      - name: AUTHENTIK_POSTGRESQL__PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: authentik-generated-secrets
+            key: postgresql_password
       - name: AUTHENTIK_SECRET_KEY
         valueFrom:
           secretKeyRef:
-            name: authentik-secret-key
+            name: authentik-generated-secrets
             key: authentik-secret-key
     startupProbe:
       initialDelaySeconds: 60
@@ -42,6 +47,10 @@ authentik:
     enabled: true
   postgresql:
     enabled: true
+    auth:
+      existingSecret: authentik-generated-secrets
+      secretKeys:
+        userPasswordKey: postgresql_password
     primary:
       persistence:
         enabled: true

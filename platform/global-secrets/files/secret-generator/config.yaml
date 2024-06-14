@@ -40,8 +40,11 @@
       special: true
 
 # Authentik
-- name: authentik.key
+- name: authentik.secrets
   data:
     - key: secret_key
+      length: 64
+      special: false
+    - key: postgresql_password
       length: 64
       special: false
