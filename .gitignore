@@ -9,4 +9,4 @@ cil
 Chart.lock
 cilium_command
 cilium.yaml
-authentik-terraform/main.tfvars
+*.tfvars
