@@ -25,6 +25,7 @@ authentik:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
+        nginx.ingress.kubernetes.io/backend-protocol: HTTPS
       hosts:
         - &host auth.notusa.uk
       tls:
