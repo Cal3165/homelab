@@ -1,0 +1,51 @@
+authentik:
+  server:
+    env:
+      - name: AUTHENTIK_BOOTSTRAP_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: authentik-secrets
+            key: authentik_token
+    startupProbe:
+      initialDelaySeconds: 60
+      failureThreshold: 240
+    replicas: 2
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - &host auth.notusa.uk
+      tls:
+        - secretName: authentik-tls
+          hosts:
+            - *host
+      https: true
+  worker:
+    startupProbe:
+      initialDelaySeconds: 60
+      failureThreshold: 240
+  geoip:
+    enabled: true
+    env:
+      - name: GEOIPUPDATE_LICENSE_KEY
+        valueFrom:
+          secretKeyRef:
+            name: authentik-secrets
+            key: geoip_accountID
+      - name: GEOIPUPDATE_LICENSE_KEY
+        valueFrom:
+          secretKeyRef:
+            name: authentik-secrets
+            key: geoip_licenseKey
+  redis:
+    enabled: true
+  postgress:
+    enabled: true
+    primary:
+      persistence:
+        enabled: true
+        storageClass: longhorn
+        size: 10Gi
+

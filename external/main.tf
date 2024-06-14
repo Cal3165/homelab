@@ -10,6 +10,13 @@ module "ntfy" {
   auth   = var.ntfy
 }
 
+module "authentik_secrets" {
+  source = "./modules/extra-secrets"
+  data   = var.authentik_secrets
+  namespace = "authentik"
+  name = "authentik-secrets"
+}
+
 module "extra_secrets" {
   source = "./modules/extra-secrets"
   data   = var.extra_secrets
