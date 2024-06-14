@@ -10,7 +10,7 @@ authentik:
         valueFrom:
           secretKeyRef:
             name: authentik-secret-key
-            key: secret_key
+            key: authentik-secret-key
     startupProbe:
       initialDelaySeconds: 60
       failureThreshold: 240
