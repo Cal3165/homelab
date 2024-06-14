@@ -46,5 +46,8 @@
       length: 64
       special: false
     - key: postgresql_password
-      length: 64
+      length: 32
+      special: false
+    - key: postgresql_admin_password
+      length: 32
       special: false
