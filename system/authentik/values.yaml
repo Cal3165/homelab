@@ -28,17 +28,11 @@ authentik:
       failureThreshold: 240
   geoip:
     enabled: true
-    env:
-      - name: GEOIPUPDATE_LICENSE_KEY
-        valueFrom:
-          secretKeyRef:
-            name: authentik-secrets
-            key: geoip_accountID
-      - name: GEOIPUPDATE_LICENSE_KEY
-        valueFrom:
-          secretKeyRef:
-            name: authentik-secrets
-            key: geoip_licenseKey
+    existingSecret:
+      name: authentik-secrets
+      accountId: geoip_accountID
+      licenseKey: geoip_licenseKey
+
   redis:
     enabled: true
   postgress:
