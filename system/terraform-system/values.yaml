@@ -1,0 +1,3 @@
+syncWorkspace:
+    terraformRC:
+      secretKey: organization_token

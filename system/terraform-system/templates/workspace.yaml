@@ -1,0 +1,54 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+apiVersion: app.terraform.io/v1alpha2
+kind: Workspace
+metadata:
+  name: kube-runner
+spec:
+  project:
+    name: kube-runner-project
+  organization: cal-homelab
+  token:
+    secretKeyRef:
+      name: terraformrc
+      key: organization_token
+  name: kube-runner
+  description: Kubernetes Operator Automated Workspace
+  applyMethod: auto
+  agentPool: 
+    name: agent-pool
+  terraformVersion: 1.6.3
+  terraformVariables:
+    - name: grafana_redirect_uri
+      value: "https://grafana.notusa.uk/login/generic_oauth"
+    - name: argocd_redirect_uri
+      value: "https://argocd.notusa.uk/api/dex/callback"
+    - name: authentik_url
+      value: "http://authentik-authentik-http.authentik.svc.cluster.local:10230/"
+  environmentVariables:
+    - name: grafana_client_id
+      sensitive: false
+      valueFrom:
+        secretKeyRef:
+          name: terraform-config-secrets
+          key: grafana-client-id
+    - name: argocd_client_id
+      sensitive: false
+      valueFrom:
+        secretKeyRef:
+          name: terraform-config-secrets
+          key: argocd-client-id
+    - name: authentik_token
+      sensitive: true
+      valueFrom:
+        secretKeyRef:
+          name: terraform-config-secrets
+          key: authentik-token
+  tags:
+    - authentik
+  executionMode: agent
+  # Configure the workspace to use the agent pool
+  # executionMode: agent
+  # agentPool:
+  #   name: agent-pool-demo

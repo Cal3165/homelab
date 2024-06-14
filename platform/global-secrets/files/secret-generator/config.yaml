@@ -51,3 +51,18 @@
     - key: postgresql_admin_password
       length: 32
       special: false
+    - key: authentik_token
+      length: 40
+      special: false
+
+- name: auth.argocd
+  data:
+    - key: client_id
+      length: 32
+      special: false
+
+- name: auth.grafana
+  data:
+    - key: client_id
+      length: 32
+      special: false

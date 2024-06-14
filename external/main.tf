@@ -17,6 +17,13 @@ module "authentik_secrets" {
   name = "authentik-secrets"
 }
 
+module "terraform_api_key" {
+  source = "./modules/extra-secrets"
+  data   = var.terraform_api_key
+  namespace = "terraform-system"
+  name = "terraformrc"
+}
+
 module "extra_secrets" {
   source = "./modules/extra-secrets"
   data   = var.extra_secrets
