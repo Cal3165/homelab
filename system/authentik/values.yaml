@@ -33,6 +33,17 @@ authentik:
             - *host
       https: true
   worker:
+    env:
+      - name: AUTHENTIK_POSTGRESQL__PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: authentik-generated-secrets
+            key: postgresql-password
+      - name: AUTHENTIK_SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            name: authentik-generated-secrets
+            key: authentik-secret-key
     startupProbe:
       initialDelaySeconds: 60
       failureThreshold: 240
