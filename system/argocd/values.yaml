@@ -2,10 +2,10 @@ argo-cd:
   global:
     domain: argocd.notusa.uk
   configs:
-    secret:
-        extra:
-            dex.authentik.clientSecret: "${argocd-authentik-secret:secret}"
-            dex.authentik.clientID: "${argocd-authentik-secret:client_id}"
+    # secret:
+    #     extra:
+    #         dex.authentik.clientSecret: "${argocd-authentik-secret:secret}"
+    #         dex.authentik.clientID: "${}"
     params:
       server.insecure: true
       controller.diff.server.side: true
@@ -18,8 +18,8 @@ argo-cd:
         connectors:
         - config:
             issuer: https://auth.notusa.uk/application/o/argocd/
-            clientID: $dex.authentik.clientID
-            clientSecret: $dex.authentik.clientSecret
+            clientID: $argocd-authentik-secret:client_id
+            clientSecret: $argocd-authentik-secret:secret
             insecureEnableGroups: true
             scopes:
               - openid
