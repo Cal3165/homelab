@@ -48,6 +48,7 @@ spec:
   tags:
     - authentik
   executionMode: agent
+  workingDirectory: "/authentik-terraform"
   # Configure the workspace to use the agent pool
   # executionMode: agent
   # agentPool:
