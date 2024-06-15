@@ -9,7 +9,7 @@ spec:
       name: terraformrc
       key: organization_token
   module:
-    source: "git::http://gitea-http.gitea:3000/ops/homelab.git//authentik-terraform"
+    source: "git::http://gitea-http.gitea.svc.cluster.local:3000/ops/homelab.git//authentik-terraform"
   outputs:
     - name: grafana_secret
       sensitive: true
@@ -24,5 +24,6 @@ spec:
     - name: grafana_client_id
     - name: argocd_client_id
     - name: authentik_token
+  name: authentik-setup
   workspace:
     name: kube-runner
