@@ -17,9 +17,8 @@ spec:
         command:
          - "/bin/sh"
          - "-c"
-         - "cd /config"
-         - "/bin/terraform init"
-         - "/bin/terraform apply -auto-approve"
+         - "/bin/terraform init -chdir=/config"
+         - "/bin/terraform apply -auto-approve -chdir=/config"
         volumeMounts:
         - name: config
           mountPath: "/config"
