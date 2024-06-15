@@ -27,7 +27,7 @@ grafana:
       generic_oauth:
         enabled: true
         name: authentik
-        client_id: grafana-sso
+        client_id: $__env{GRAFANA_SSO_CLIENT_ID}
         client_secret: $__env{GRAFANA_SSO_CLIENT_SECRET}
         scopes: openid profile email
         auth_url: "https://auth.notusa.uk/application/o/authorize/"
