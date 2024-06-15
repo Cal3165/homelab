@@ -11,3 +11,16 @@ subjects:
   - kind: ServiceAccount
     name: external-secrets-kubernetes-global-secrets
     namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: terraform-read-secrets-external-secrets
+  namespace: terraform-system
+subjects:
+- kind: ServiceAccount
+  name: external-secrets-kubernetes-global-secrets
+roleRef:
+  kind: ClusterRole
+  name: secret-reader
+  apiGroup: rbac.authorization.k8s.io
