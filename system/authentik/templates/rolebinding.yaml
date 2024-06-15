@@ -32,6 +32,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: authentik-terraform
+    namespace: authentik
 roleRef:
   kind: ClusterRole
   name: create-remote-secret
