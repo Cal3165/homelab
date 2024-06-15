@@ -19,9 +19,9 @@ spec:
         - name: tfc-agent
           image: "hashicorp/tfc-agent:1.13.1"
   # Enable autoscaling
-    autoscaling:
-      minReplicas: 0
-      maxReplicas: 1
-      cooldownPeriodSeconds: 30
-      targetWorkspaces:
-      - name: kube-runner
+  autoscaling:
+    minReplicas: 0
+    maxReplicas: 1
+    cooldownPeriodSeconds: 30
+    targetWorkspaces:
+    - name: kube-runner
