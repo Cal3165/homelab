@@ -8,6 +8,6 @@ data:
 {{ $.Files.Get $path | indent 4 }}
 {{ end }}
 {{- range $path, $_ :=  .Files.Glob  "authentik-terraform/modules/odic_app/*.tf" }}    
-  {{ $path | trimPrefix "authentik-terraform/modules/odic_app/" | cat "odic_app_" }}: |- 
+  {{ $path | trimPrefix "authentik-terraform/modules/odic_app/" | trim | cat "odic_app_" }}: |- 
 {{ $.Files.Get $path | indent 4 }}
 {{ end }}
