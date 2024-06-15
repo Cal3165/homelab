@@ -3,6 +3,9 @@ kind: Job
 metadata:
   name: authentik-terraform-job
   namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   template:
     metadata:
