@@ -5,7 +5,25 @@ argo-cd:
     params:
       server.insecure: true
       controller.diff.server.side: true
+    rbac:
+      policy.csv: |
+        g, ArgoCD Admins, role:admin
+        g, ArgoCD Viewers, role:readonly
     cm:
+      dex.config: |
+        connectors:
+        - config:
+            issuer: https://auth.notusa.uk/application/o/argocd/
+            clientID: $argocd-authentik-secret:client_id
+            clientSecret: $argocd-authentik-secret:secret
+            insecureEnableGroups: true
+            scopes:
+              - openid
+              - profile
+              - email
+          name: authentik
+          type: oidc
+          id: authentik
       resource.ignoreResourceUpdatesEnabled: true
       resource.customizations.ignoreResourceUpdates.all: |
         jsonPointers:
