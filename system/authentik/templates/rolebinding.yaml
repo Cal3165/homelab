@@ -23,3 +23,16 @@ roleRef:
   kind: Role
   name: leases-manipulation
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: authentik-terraform-leases
+  namespace: {{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: authentik-terraform
+roleRef:
+  kind: Role
+  name: create-remote-secret
+  apiGroup: rbac.authorization.k8s.io
