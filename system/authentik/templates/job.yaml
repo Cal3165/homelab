@@ -20,11 +20,15 @@ spec:
           - "-c" 
           - "cp /config/* /localdata -rs  && cd /localdata && /bin/terraform init && /bin/terraform apply -auto-approve"
         volumeMounts:
-        - name: config
-          mountPath: "/config"
-          readOnly: false
+          - name: config
+            mountPath: /config
+          - name: local
+            mountPath: /localdata
       restartPolicy: Never
       volumes:
+      - name: local
+        emptyDir:
+          sizeLimit: 500Mi
       - name: config
         configMap:
           name: authentik-terraform
