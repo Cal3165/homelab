@@ -16,8 +16,6 @@ spec:
   name: kube-runner
   description: Kubernetes Operator Automated Workspace
   applyMethod: auto
-  agentPool: 
-    name: agent-pool
   terraformVersion: 1.6.3
   terraformVariables:
     - name: grafana_redirect_uri
@@ -47,7 +45,7 @@ spec:
           key: authentik-token
   tags:
     - authentik
-  executionMode: agent
+  executionMode: local
   # Configure the workspace to use the agent pool
   # executionMode: agent
   # agentPool:
