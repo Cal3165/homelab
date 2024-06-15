@@ -15,11 +15,11 @@ spec:
       - name:  authentik-terraform
         image: hashicorp/terraform:1.8
         command:
-         - "bin/bash"
+         - "/bin/bash"
          - "-c"
-         - "cd /config"
-         - "terraform init"
-         - "terraform apply -auto-approve"
+         - "/bin/cd /config"
+         - "/bin/terraform init"
+         - "/bin/terraform apply -auto-approve"
         volumeMounts:
         - name: config
           mountPath: "/config"
