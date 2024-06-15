@@ -5,7 +5,7 @@ authentik:
         valueFrom:
           secretKeyRef:
             name: authentik-generated-secrets
-            key: authentik_token
+            key: authentik-token
       - name: AUTHENTIK_POSTGRESQL__PASSWORD
         valueFrom:
           secretKeyRef:
@@ -39,7 +39,7 @@ authentik:
         valueFrom:
           secretKeyRef:
             name: authentik-generated-secrets
-            key: authentik_token
+            key: authentik-token
       - name: AUTHENTIK_POSTGRESQL__PASSWORD
         valueFrom:
           secretKeyRef:
