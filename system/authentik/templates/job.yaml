@@ -22,7 +22,7 @@ spec:
         volumeMounts:
         - name: config
           mountPath: "/config"
-          readOnly: true
+          readOnly: false
       restartPolicy: Never
       volumes:
       - name: config
