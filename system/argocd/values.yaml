@@ -5,7 +5,7 @@ argo-cd:
     secret:
         extra:
             dex.authentik.clientSecret: "${argocd-authentik-secret:secret}"
-            dex.authentik.clientID: "${argocd-authentik-secret:secret}"
+            dex.authentik.clientID: "${argocd-authentik-secret:client_id}"
     params:
       server.insecure: true
       controller.diff.server.side: true
