@@ -49,7 +49,7 @@ authentik:
       initialDelaySeconds: 60
       failureThreshold: 240
   geoip:
-    enabled: true
+    enabled: false
     existingSecret:
       secretName: authentik-secrets
       accountId: geoip_accountID
