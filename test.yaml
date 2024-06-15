@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentik-terraform
+  namespace: authentik
+  labels:
+    app: authentik-terraform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentik-terraform
+  template:
+    metadata:
+      name:  authentik-terraform
+      labels:
+        app: authentik-terraform
+    spec:
+      containers:
+        - name:  authentik-terraform
+          image: hashicorp/terraform:1.8
+          command:
+          - "/bin/sh"
+          - "-c"
+          - "cd /config"
+          - "/bin/terraform init"
+          - "/bin/terraform apply -auto-approve "
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
+              readOnly: false
+      volumes:
+        - name: config
+          configMap:
+            name: authentik-terraform
+            items:
+              - key: "main.tf"
+                path: "main.tf"
+              - key: "odic_apps.tf"
+                path: "odic_apps.tf"
+              - key: "users.tf"
+                path: "users.tf"
+              - key: "odic_app_main.tf"
+                path: "modules/odic_app/main.tf"
+              - key: "odic_app_outputs.tf"
+                path: "modules/odic_app/outputs.tf"
+              - key: "odic_app_variables.tf"
+                path: "modules/odic_app/variables.tf"
+              - key: "odic_app_versions.tf"
+                path: "modules/odic_app/versions.tf"
+
