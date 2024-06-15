@@ -51,7 +51,7 @@ authentik:
             name: authentik-generated-secrets
             key: authentik-secret-key
     startupProbe:
-      initialDelaySeconds: 60
+      initialDelaySeconds: 40
       failureThreshold: 240
   geoip:
     enabled: false
