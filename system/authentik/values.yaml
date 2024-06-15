@@ -4,7 +4,7 @@ authentik:
       - name: AUTHENTIK_BOOTSTRAP_TOKEN
         valueFrom:
           secretKeyRef:
-            name: authentik-secrets
+            name: authentik-generated-secrets
             key: authentik_token
       - name: AUTHENTIK_POSTGRESQL__PASSWORD
         valueFrom:
@@ -38,7 +38,7 @@ authentik:
       - name: AUTHENTIK_BOOTSTRAP_TOKEN
         valueFrom:
           secretKeyRef:
-            name: authentik-secrets
+            name: authentik-generated-secrets
             key: authentik_token
       - name: AUTHENTIK_POSTGRESQL__PASSWORD
         valueFrom:
