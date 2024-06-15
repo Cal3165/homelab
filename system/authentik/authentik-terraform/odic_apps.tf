@@ -16,7 +16,7 @@ module "grafana" {
 module "argocd" {
   source = "./modules/odic_app"
   app_name = "ArgoCD"
-  app_client_id = "1bh8CXFDnV18kFshTPOXs7smq55bGRio"
+  app_client_id = data.kubernetes_secret.terraform-config-secrets.data.argocd-client-id
   app_redirect_uris = [
     local.argocd_redirect_uri,
     "http://localhost:8085/auth/callback"
