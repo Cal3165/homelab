@@ -10,3 +10,5 @@ Chart.lock
 cilium_command
 cilium.yaml
 *.tfvars
+.terraform*
+*.tfstate
