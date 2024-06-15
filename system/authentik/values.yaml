@@ -35,6 +35,11 @@ authentik:
       https: true
   worker:
     env:
+      - name: AUTHENTIK_BOOTSTRAP_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: authentik-secrets
+            key: authentik_token
       - name: AUTHENTIK_POSTGRESQL__PASSWORD
         valueFrom:
           secretKeyRef:
