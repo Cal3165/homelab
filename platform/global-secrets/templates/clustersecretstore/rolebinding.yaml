@@ -19,6 +19,10 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: external-secrets-kubernetes-global-secrets
+  namespace: {{ .Release.Namespace }}
+- kind: ServiceAccount
+  name: secret-generator
+  namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
   name: secret-reader
