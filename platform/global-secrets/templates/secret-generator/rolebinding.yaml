@@ -11,3 +11,17 @@ subjects:
   - kind: ServiceAccount
     name: secret-generator
     namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-secrets
+  namespace: terraform-system
+subjects:
+- kind: ServiceAccount
+  name: secret-generator
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: secret-reader
+  apiGroup: rbac.authorization.k8s.io
