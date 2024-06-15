@@ -15,7 +15,7 @@ terraform {
   }
   backend "kubernetes" {
     secret_suffix    = "state"
-    config_path      = "~/.kube/config"
+    namespace = "authentik"
   }
 }
 
@@ -26,7 +26,6 @@ provider "authentik" {
 }
 
 provider "kubernetes" {
-  config_path    = "~/.kube/config"
 }
 
 locals {

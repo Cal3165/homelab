@@ -22,6 +22,8 @@ metadata:
 rules:
   - apiGroups:
       - ""
+    resourceNames: 
+     - "authentik-setup-output"
     resources:
       - secrets
     verbs:
