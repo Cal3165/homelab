@@ -14,7 +14,7 @@ argo-cd:
         connectors:
         - config:
             issuer: https://auth.notusa.uk/application/o/argocd/
-            clientID: $argocd-authentik-secret:client_id
+            clientID: 1bh8CXFDnV18kFshTPOXs7smq55bGRio
             clientSecret: $argocd-authentik-secret:secret
             insecureEnableGroups: true
             scopes:
