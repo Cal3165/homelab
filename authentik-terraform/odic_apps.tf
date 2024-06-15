@@ -1,8 +1,8 @@
 module "grafana" {
   source = "./modules/odic_app"
   app_name = "Grafana"
-  app_client_id = var.grafana_client_id
-  app_redirect_uris = [var.grafana_redirect_uri]
+  app_client_id = data.kubernetes_secret.terraform-config-secrets.data.grafana-client-id
+  app_redirect_uris = [local.grafana_redirect_uri]
   app_property_mappings = [
     data.authentik_scope_mapping.scope-email.id,
     data.authentik_scope_mapping.scope-profile.id,
@@ -16,9 +16,9 @@ module "grafana" {
 module "argocd" {
   source = "./modules/odic_app"
   app_name = "ArgoCD"
-  app_client_id = var.argocd_client_id
+  app_client_id = data.kubernetes_secret.terraform-config-secrets.data.argocd-client-id
   app_redirect_uris = [
-    var.argocd_redirect_uri,
+    local.argocd_redirect_uri,
     "http://localhost:8085/auth/callback"
   ]
   app_property_mappings = [

@@ -1,16 +1,40 @@
 #Providers
 terraform {
   required_providers {
+
     authentik = {
       source = "goauthentik/authentik"
       version = "2024.2.0"
     }
+
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.26.0"
+    }
+
   }
 }
 
 provider "authentik" {
-  url   = var.authentik_url
-  token = var.authentik_token
+  url   = local.authentik_url
+  token = data.kubernetes_secret.terraform-config-secrets.data.authentik_token
+}
+
+provider "kubernetes" {
+  config_path    = "~/.kube/config"
+}
+
+locals {
+  argocd_redirect_uri = "https://argocd.notusa.uk/api/dex/callback"
+  grafana_redirect_uri = "https://grafana.notusa.uk/login/generic_oauth"
+  authentik_url = "https://auth.notusa.uk/"
+}
+
+data "kubernetes_secret" "terraform-config-secrets" {
+  metadata {
+    name = "terraform-config-secrets"
+    namespace = "authentik"
+  }
 }
 
 # Defualts
@@ -34,4 +58,16 @@ resource "authentik_token" "homepage-token" {
   intent        = "api"
   expiring      = false
   retrieve_key  = true
+}
+
+resource "kubernetes_secret" "authentik_setup_output" {
+  metadata {
+    name = "authentik-setup-output"
+    namespace = "global-secrets"
+  }
+  data = {
+    grafana_secret = module.grafana.provider_secret
+    argocd_secret = module.argocd.provider_secret
+    homepage_token = authentik_token.homepage-token.key
+  }
 }
