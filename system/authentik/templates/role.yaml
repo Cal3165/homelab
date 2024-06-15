@@ -14,3 +14,13 @@ rules:
       - create
       - update
       - patch
+  - apiGroups:
+      - ""
+    resources:
+      - leases
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - patch
