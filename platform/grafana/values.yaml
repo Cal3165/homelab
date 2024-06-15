@@ -23,8 +23,7 @@ grafana:
       root_url: https://grafana.notusa.uk
     panels:
       disable_sanitize_html: true
-    auth:
-      generic_oauth:
+    auth.generic_oauth:
         enabled: true
         name: authentik
         client_id: $__env{GRAFANA_SSO_CLIENT_ID}
@@ -34,7 +33,7 @@ grafana:
         token_url: "https://auth.notusa.uk/application/o/token/"
         api_url: "https://auth.notusa.uk/application/o/userinfo/"
         role_attribute_path: "contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'"
-      signout:
+    auth.signout:
         redirect_url: "https://auth.notusa.uk/application/o/grafana/end-session/"
-      oauth:
+    auth.oauth:
         auto_login: false
