@@ -36,7 +36,11 @@ gitea:
         existingSecret: gitea-authentik-secret
         autoDiscoverUrl: "https://auth.notusa.uk/application/o/gitea/.well-known/openid-configuration"
         iconUrl: "https://goauthentik.io/img/icon.png"
-        scopes: "email profile"
+        scopes: "email profile gitea"
+        requiredclaimname: gitea
+        groupclaimname: gitea
+        admingroup: admin
+        restrictedgroup: restricted
     config:
       server:
         LANDING_PAGE: explore

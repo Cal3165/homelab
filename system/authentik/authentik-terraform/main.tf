@@ -53,6 +53,23 @@ data "authentik_scope_mapping" "scope-profile" {
 data "authentik_scope_mapping" "scope-openid" {
   name = "authentik default OAuth Mapping: OpenID 'openid'"
 }
+# Create a scope mapping
+
+resource "authentik_scope_mapping" "gitea" {
+  name       = "authentik gitea OAuth Mapping: OpenID 'gitea'"
+  scope_name = "gitea"
+  expression = <<EOF
+gitea_claims = {}
+if request.user.ak_groups.filter(name="gituser").exists():
+    gitea_claims["gitea"]= "user"
+if request.user.ak_groups.filter(name="gitadmin").exists():
+    gitea_claims["gitea"]= "admin"
+if request.user.ak_groups.filter(name="gitrestricted").exists():
+    gitea_claims["gitea"]= "restricted"
+
+return gitea_claims
+EOF
+}
 
 # Homepage API Token
 resource "authentik_token" "homepage-token" {

@@ -40,6 +40,7 @@ module "gitea" {
     data.authentik_scope_mapping.scope-email.id,
     data.authentik_scope_mapping.scope-profile.id,
     data.authentik_scope_mapping.scope-openid.id,
+    authentik_scope_mapping.gitea.id,
   ]
   app_admin_group = "gitadmin"
   app_admin_users = [data.authentik_user.akadmin.id, authentik_user.caleb.id]
