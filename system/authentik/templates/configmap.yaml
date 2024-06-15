@@ -3,11 +3,11 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-terraform-configmap
 data:
-{{- range $path, $_ :=  .Files.Glob  "authentik-terraform/**.tf" }}    
+{{- range $path, $_ :=  .Files.Glob  "authentik-terraform/*.tf" }}    
   {{ $path | trimPrefix "authentik-terraform/" }}: |- 
 {{ $.Files.Get $path | indent 4 }}
 {{ end }}
-{{- range $path, $_ :=  .Files.Glob  "authentik-terraform/modules/odic_app/**.tf" }}    
+{{- range $path, $_ :=  .Files.Glob  "authentik-terraform/modules/odic_app/*.tf" }}    
   {{ $path | trimPrefix "authentik-terraform/modules/odic_app/" | cat "odic_app_" }}: |- 
 {{ $.Files.Get $path | indent 4 }}
 {{ end }}
