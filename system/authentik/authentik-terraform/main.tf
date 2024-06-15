@@ -72,6 +72,7 @@ resource "kubernetes_secret" "authentik_setup_output" {
   data = {
     grafana_secret = module.grafana.provider_secret
     argocd_secret = module.argocd.provider_secret
+    gitea_secret = module.gitea.provider_secret
     homepage_token = authentik_token.homepage-token.key
   }
 }

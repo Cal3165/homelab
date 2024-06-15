@@ -66,3 +66,9 @@
     - key: client_id
       length: 32
       special: false
+
+- name: auth.gitea
+  data:
+    - key: client_id
+      length: 32
+      special: false

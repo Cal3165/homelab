@@ -31,7 +31,7 @@ spec:
           sizeLimit: 500Mi
       - name: config
         configMap:
-          name: authentik-terraform
+          name: {{ .Release.Name }}-terraform-configmap
           items:
           - key: "main.tf"
             path: "main.tf"

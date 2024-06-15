@@ -1,7 +1,0 @@
-apiVersion: v2
-name: terraform
-version: 0.0.0
-dependencies:
-  - name: terraform-cloud-operator
-    version: 2.4.1
-    repository: https://helm.releases.hashicorp.com

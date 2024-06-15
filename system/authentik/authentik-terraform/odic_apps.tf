@@ -30,3 +30,18 @@ module "argocd" {
   app_admin_users = [data.authentik_user.akadmin.id, authentik_user.caleb.id]
   app_groups = ["ArgoCD Viewers"]
 }
+
+module "gitea" {
+  source = "./modules/odic_app"
+  app_name = "Gitea"
+  app_client_id = data.kubernetes_secret.terraform-config-secrets.data.gitea-client-id
+  app_redirect_uris = [""]
+  app_property_mappings = [
+    data.authentik_scope_mapping.scope-email.id,
+    data.authentik_scope_mapping.scope-profile.id,
+    data.authentik_scope_mapping.scope-openid.id,
+  ]
+  app_admin_group = "gitadmin"
+  app_admin_users = [data.authentik_user.akadmin.id, authentik_user.caleb.id]
+  app_groups = ["gituser","gitrestricted"]
+}
