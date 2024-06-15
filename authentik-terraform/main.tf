@@ -13,11 +13,16 @@ terraform {
     }
 
   }
+  backend "kubernetes" {
+    secret_suffix    = "state"
+    config_path      = "~/.kube/config"
+  }
 }
+
 
 provider "authentik" {
   url   = local.authentik_url
-  token = data.kubernetes_secret.terraform-config-secrets.data.authentik_token
+  token = data.kubernetes_secret.terraform-config-secrets.data.authentik-token
 }
 
 provider "kubernetes" {

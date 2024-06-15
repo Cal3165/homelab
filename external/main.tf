@@ -28,3 +28,18 @@ module "extra_secrets" {
   source = "./modules/extra-secrets"
   data   = var.extra_secrets
 }
+
+module "authentik_terraform_config_map" {
+  source = "./modules/configmap"
+  data = {
+    "main.tf" = "${file("${path.root}/../authentik-terraform/main.tf")}"
+    "odic_apps.tf" = "${file("${path.root}/../authentik-terraform/odic_apps.tf")}"
+    "users.tf" = "${file("${path.root}/../authentik-terraform/users.tf")}"
+    "odic_app_main.tf" = "${file("${path.root}/../authentik-terraform/modules/odic_app/main.tf")}"
+    "odic_app_outputs.tf" = "${file("${path.root}/../authentik-terraform/modules/odic_app/outputs.tf")}"
+    "odic_app_variables.tf" = "${file("${path.root}/../authentik-terraform/modules/odic_app/variables.tf")}"
+    "odic_app_versions.tf" = "${file("${path.root}/../authentik-terraform/modules/odic_app/versions.tf")}"
+  }
+  name = "authentik-terraform"
+  namespace = "authentik"
+}
