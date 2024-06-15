@@ -25,7 +25,7 @@ spec:
     - name: argocd_redirect_uri
       value: "https://argocd.notusa.uk/api/dex/callback"
     - name: authentik_url
-      value: "http:/authentik-server.authentik.svc.cluster.local:80/"
+      value: "https://authentik-server.authentik/"
     - name: grafana_client_id
       sensitive: false
       valueFrom:

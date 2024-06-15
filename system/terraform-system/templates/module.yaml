@@ -9,7 +9,7 @@ spec:
       name: terraformrc
       key: organization_token
   module:
-    source: "github.com/Cal3165/homelab//authentik-terraform"
+    source: "git::https://git.notusa.uk/ops/homelab.git//authentik-terraform"
   outputs:
     - name: grafana_secret
       sensitive: true
