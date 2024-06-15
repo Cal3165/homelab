@@ -22,4 +22,4 @@ subjects:
 roleRef:
   kind: Role
   name: leases-manipulation
-  apiGroup: coordination.k8s.io
+  apiGroup: rbac.authorization.k8s.io
