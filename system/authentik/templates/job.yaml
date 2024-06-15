@@ -17,7 +17,7 @@ spec:
         command:
          - "/bin/sh"
          - "-c"
-         - "/bin/cd /config"
+         - "cd /config"
          - "/bin/terraform init"
          - "/bin/terraform apply -auto-approve"
         volumeMounts:
