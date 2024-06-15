@@ -35,7 +35,7 @@ module "gitea" {
   source = "./modules/odic_app"
   app_name = "Gitea"
   app_client_id = data.kubernetes_secret.terraform-config-secrets.data.gitea-client-id
-  app_redirect_uris = ["test"]
+  app_redirect_uris = ["https://git.notusa.uk/user/oauth2/authentik/callback"]
   app_property_mappings = [
     data.authentik_scope_mapping.scope-email.id,
     data.authentik_scope_mapping.scope-profile.id,
