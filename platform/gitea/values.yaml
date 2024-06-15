@@ -34,7 +34,7 @@ gitea:
       - name: "authentik"
         provider: "openidConnect"
         existingSecret: gitea-authentik-secret
-        autoDiscoverUrl: "https://auth.notusa.uk/application/o/gitea-slug/.well-known/openid-configuration"
+        autoDiscoverUrl: "https://auth.notusa.uk/application/o/gitea/.well-known/openid-configuration"
         iconUrl: "https://goauthentik.io/img/icon.png"
         scopes: "email profile"
     config:
