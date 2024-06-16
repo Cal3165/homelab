@@ -12,3 +12,4 @@ cilium.yaml
 *.tfvars
 .terraform*
 *.tfstate
+omni/*
