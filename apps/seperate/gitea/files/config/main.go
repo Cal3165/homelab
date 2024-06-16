@@ -118,11 +118,13 @@ func main() {
 			log.Printf("Get File For Update %s/%s: %v", file.Repo, file.Path, err)
 		}
 		updatedContent := strings.Replace(*contentsResponse.Content, "https://github.com/Cal3165/homelab", "http://gitea-http.gitea:3000/ops/homelab", -1)
-		log.Printf("Config: %s", *contentsResponse.Content)
+		log.Printf("Original: %s", *contentsResponse.Content)
+		log.Printf("Updated: %s", updatedContent)
 		updateOptions := gitea.UpdateFileOptions{
 			SHA:     contentsResponse.SHA,
 			Content: updatedContent,
 		}
+
 		_, _, err = client.UpdateFile(file.Owner, file.Repo, file.Path, updateOptions)
 		if err != nil {
 			log.Printf("Update File %s/%s: %v", file.Repo, file.Path, err)
