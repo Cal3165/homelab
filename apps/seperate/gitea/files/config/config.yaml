@@ -33,6 +33,14 @@ files:
     owner: ops
     repo: homelab
     branch: master
+  - path: appOfApps/0-monitoring.yaml
+    owner: ops
+    repo: homelab
+    branch: master
+  - path: appOfApps/1-ingress.yaml
+    owner: ops
+    repo: homelab
+    branch: master
   - path: appOfApps/1-base.yaml
     owner: ops
     repo: homelab

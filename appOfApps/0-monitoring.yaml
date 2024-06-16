@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  argocd.argoproj.io/sync-wave: "3"
+  argocd.argoproj.io/sync-wave: "0"
   annotations:
     argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  name: gitea
-  namespace: argocd
+  name: monitoring-system
+  namespace: monitoring-system
 spec:
   destination:
     name: in-cluster
-    namespace: gitea
+    namespace: monitoring-system
   project: default
   source:
-    path: apps/seperate/gitea
+    path: apps/seperate/monitoring-system
     repoURL: https://github.com/Cal3165/homelab
     targetRevision: master
   syncPolicy:

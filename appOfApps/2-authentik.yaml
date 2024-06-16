@@ -14,7 +14,7 @@ spec:
     namespace: authentik
   project: default
   source:
-    path: apps/authentik
+    path: apps/seperate/authentik
     repoURL: https://github.com/Cal3165/homelab
     targetRevision: master
   syncPolicy:
