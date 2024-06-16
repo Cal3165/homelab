@@ -104,7 +104,7 @@ argocd-apps:
         - resources-finalizer.argocd.argoproj.io
       source:
         path: appOfApps
-        repoURL: 'http://gitea-http.gitea:3000/ops/homelab'
+        repoURL: 'https://github.com/Cal3165/homelab'
         targetRevision: master
       destination:
         namespace: argocd
