@@ -112,8 +112,8 @@ func main() {
 		}
 	}
 	log.Printf("Updating Files")
-	log.Printf("Config: %s", config.Files[1].Path)
 	for _, file := range config.Files {
+		log.Printf("Config: Path=%s, Branch=%s, Owner=%s, Repo=%s", file.Path, file.Branch, file.Owner, file.Repo)
 		contentsResponse, _, err := client.GetContents(file.Owner, file.Repo, file.Branch, file.Path)
 		if err != nil {
 			log.Printf("Get File %s/%s: %v", file.Repo, file.Path, err)
