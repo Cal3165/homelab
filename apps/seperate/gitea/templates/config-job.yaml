@@ -55,7 +55,7 @@ metadata:
   name: update-argo-apps
 rules:
   - apiGroups:
-      - ""
+      - "argoproj.io"
     resources:
       - applications
     verbs:
@@ -84,4 +84,4 @@ subjects:
 roleRef:
   kind: ClusterRole
   name: update-argo-apps
-  apiGroup: rbac.authorization.k8s.io
+  apiGroup: argoproj.io
