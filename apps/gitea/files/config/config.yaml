@@ -29,15 +29,25 @@ repositories:
       source: https://github.com/khuedoan/backstage
       mirror: true
 files:
-  - path: appOfApps/0-base.yaml
+  - path: appOfApps/0-argocd.yaml
     owner: ops
     repo: homelab
     branch: master
-  - path: appOfApps/1-authentik.yaml
+  - path: appOfApps/1-base.yaml
     owner: ops
     repo: homelab
     branch: master
-  - path: appOfApps/2-gitea.yaml
+  - path: appOfApps/2-authentik.yaml
+    owner: ops
+    repo: homelab
+    branch: master
+  - path: appOfApps/3-gitea.yaml
+    owner: ops
+    repo: homelab
+    branch: master
+replacefile:
+  - source: apps/argocd/values-incluster.yaml
+    dest: apps/argocd/values.yaml
     owner: ops
     repo: homelab
     branch: master

@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  argocd.argoproj.io/sync-wave: "0"
+  argocd.argoproj.io/sync-wave: "4"
   name: root
   namespace: argocd
 spec:
   generators:
     - git:
-        repoURL: &repoURL https://github.com/Cal3165/homelab
+        repoURL: &repoURL http://gitea-http.gitea:3000/ops/homelab
         revision: &revision master
         directories:
-          - path: apps/base/*
+          - path: apps/platform/*
   template:
     metadata:
       name: '{{path.basename}}'

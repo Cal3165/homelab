@@ -15,7 +15,7 @@ metal:
 	make -C metal
 
 system:
-	make -C system
+	make -C apps
 
 external:
 	make -C external

@@ -33,10 +33,19 @@ type File struct {
 	Branch string
 }
 
+type Replacefile struct {
+	SourcePath string
+	DestPath   string
+	Owner      string
+	Repo       string
+	Branch     string
+}
+
 type Config struct {
 	Organizations []Organization
 	Repositories  []Repository
 	Files         []File
+	Replacefile   []Replacefile
 }
 
 func main() {
@@ -116,6 +125,30 @@ func main() {
 		if err != nil {
 			log.Printf("Update File %s/%s: %v", file.Repo, file.Path, err)
 		}
+	}
+	for _, file := range config.Replacefile {
+		// Get the content of the source file
+		sourceContents, _, err := client.GetFile(file.Owner, file.Repo, file.Branch, file.SourcePath)
+		if err != nil {
+			log.Printf("Get File %s/%s: %v", file.Repo, file.SourcePath, err)
+		}
+
+		// Get the SHA of the target file
+		targetContents, _, err := client.GetContents(file.Owner, file.Repo, file.Branch, file.DestPath)
+		if err != nil {
+			log.Printf("Get File %s/%s: %v", file.Repo, file.DestPath, err)
+		}
+
+		// Update the target file with the content of the source file
+		updateOptions := gitea.UpdateFileOptions{
+			SHA:     targetContents.SHA,
+			Content: base64.StdEncoding.EncodeToString(sourceContents),
+		}
+		_, _, err = client.UpdateFile(file.Owner, file.Repo, file.DestPath, updateOptions)
+		if err != nil {
+			log.Printf("Update File %s/%s: %v", file.Repo, file.DestPath, err)
+		}
+
 	}
 
 }

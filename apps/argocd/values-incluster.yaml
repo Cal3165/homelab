@@ -2,10 +2,6 @@ argo-cd:
   global:
     domain: argocd.notusa.uk
   configs:
-    # secret:
-    #     extra:
-    #         dex.authentik.clientSecret: "${argocd-authentik-secret:secret}"
-    #         dex.authentik.clientID: "${}"
     params:
       server.insecure: true
       controller.diff.server.side: true
