@@ -117,12 +117,18 @@ func main() {
 		if err != nil {
 			log.Printf("Get File For Update %s/%s: %v", file.Repo, file.Path, err)
 		}
-		updatedContent := strings.Replace(*contentsResponse.Content, "https://github.com/Cal3165/homelab", "http://gitea-http.gitea:3000/ops/homelab", -1)
+		decodedBytes, err := base64.StdEncoding.DecodeString(*contentsResponse.Content)
+		if err != nil {
+			log.Println("Error decoding:", err)
+			return
+		}
+		updatedContent := strings.Replace(string(decodedBytes), "https://github.com/Cal3165/homelab", "http://gitea-http.gitea:3000/ops/homelab", -1)
+
 		log.Printf("Original: %s", *contentsResponse.Content)
 		log.Printf("Updated: %s", updatedContent)
 		updateOptions := gitea.UpdateFileOptions{
 			SHA:     contentsResponse.SHA,
-			Content: updatedContent,
+			Content: base64.StdEncoding.EncodeToString([]byte(updatedContent)),
 		}
 
 		_, _, err = client.UpdateFile(file.Owner, file.Repo, file.Path, updateOptions)
