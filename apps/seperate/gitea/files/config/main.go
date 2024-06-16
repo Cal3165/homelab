@@ -121,7 +121,7 @@ func main() {
 		updatedContent := strings.Replace(*contentsResponse.Content, "https://github.com/Cal3165/homelab", "http://gitea-http.gitea:3000/ops/homelab", -1)
 		updateOptions := gitea.UpdateFileOptions{
 			SHA:     contentsResponse.SHA,
-			Content: base64.StdEncoding.EncodeToString([]byte(updatedContent)),
+			Content: updatedContent,
 		}
 		_, _, err = client.UpdateFile(file.Owner, file.Repo, file.Path, updateOptions)
 		if err != nil {
