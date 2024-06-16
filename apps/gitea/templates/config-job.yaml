@@ -4,13 +4,15 @@ metadata:
   name: gitea-config-{{ include (print $.Template.BasePath "/config-source.yaml") . | sha256sum | trunc 7 }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: before-hook-creation #hook-succeeded
 spec:
   backoffLimit: 10
   template:
     spec:
+      serviceAccountName: argocd-update
       restartPolicy: Never
-      containers:
+      initContainers:
         - name: apply
           image: golang:1.19-alpine
           env:
@@ -37,7 +39,49 @@ spec:
           volumeMounts:
             - name: source
               mountPath: /go/src/gitea-config
+      containers:
+      - name: update-resource-container
+        image: bitnami/kubectl
+        command: ['sh', '-c', 'kubectl get application app-of-apps -n argocd -o json | jq '.spec.source.repoURL |= sub("https://github.com/Cal3165/homelab"; "http://gitea-http.gitea:3000/ops/homelab")' | kubectl apply -f -']
       volumes:
         - name: source
           configMap:
             name: gitea-config-source
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: update-argo-apps
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - application
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - patch
+      - delete
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: argocd-update
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: authentik-terraform-remote-secret
+  namespace: {{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: argocd-update
+    namespace: argocd
+roleRef:
+  kind: ClusterRole
+  name: update-argo-apps
+  apiGroup: rbac.authorization.k8s.io

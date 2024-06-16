@@ -98,7 +98,7 @@ argo-cd:
 
 argocd-apps:
   applications:
-    appOfApps:
+    app-of-apps:
       namespace: argocd
       finalizers:
         - resources-finalizer.argocd.argoproj.io
