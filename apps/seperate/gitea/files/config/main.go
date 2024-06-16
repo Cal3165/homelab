@@ -116,7 +116,7 @@ func main() {
 		log.Printf("Config: Path=%s, Branch=%s, Owner=%s, Repo=%s", file.Path, file.Branch, file.Owner, file.Repo)
 		contentsResponse, _, err := client.GetContents(file.Owner, file.Repo, file.Branch, file.Path)
 		if err != nil {
-			log.Printf("Get File %s/%s: %v", file.Repo, file.Path, err)
+			log.Printf("Get File For Update %s/%s: %v", file.Repo, file.Path, err)
 		}
 		updatedContent := strings.Replace(*contentsResponse.Content, "https://github.com/Cal3165/homelab", "http://gitea-http.gitea:3000/ops/homelab", -1)
 		updateOptions := gitea.UpdateFileOptions{
@@ -134,13 +134,13 @@ func main() {
 		// Get the content of the source file
 		sourceContents, _, err := client.GetFile(file.Owner, file.Repo, file.Branch, file.SourcePath)
 		if err != nil {
-			log.Printf("Get File %s/%s: %v", file.Repo, file.SourcePath, err)
+			log.Printf("Get Original File For Replace %s/%s: %v", file.Repo, file.SourcePath, err)
 		}
 
 		// Get the SHA of the target file
 		targetContents, _, err := client.GetContents(file.Owner, file.Repo, file.Branch, file.DestPath)
 		if err != nil {
-			log.Printf("Get File %s/%s: %v", file.Repo, file.DestPath, err)
+			log.Printf("Get New File For Replace %s/%s: %v", file.Repo, file.DestPath, err)
 		}
 
 		// Update the target file with the content of the source file
@@ -150,7 +150,7 @@ func main() {
 		}
 		_, _, err = client.UpdateFile(file.Owner, file.Repo, file.DestPath, updateOptions)
 		if err != nil {
-			log.Printf("Update File %s/%s: %v", file.Repo, file.DestPath, err)
+			log.Printf("Replace File %s/%s: %v", file.Repo, file.DestPath, err)
 		}
 
 	}
