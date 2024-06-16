@@ -13,3 +13,4 @@ cilium.yaml
 .terraform*
 *.tfstate
 omni/*
+omnictl-linux-amd64
