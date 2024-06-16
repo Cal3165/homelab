@@ -148,9 +148,9 @@ func main() {
 			SHA:     targetContents.SHA,
 			Content: base64.StdEncoding.EncodeToString(sourceContents),
 		}
-		_, _, err = client.UpdateFile(file.Owner, file.Repo, file.DestPath, updateOptions)
+		_, _, err = client.UpdateFile(file.Owner, file.Repo, file.Destpath, updateOptions)
 		if err != nil {
-			log.Printf("Replace File %s/%s: %v", file.Repo, file.DestPath, err)
+			log.Printf("Replace File %s/%s: %v", file.Repo, file.Destpath, err)
 		}
 
 	}
