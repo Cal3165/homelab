@@ -23,6 +23,7 @@ terraform {
 provider "authentik" {
   url   = local.authentik_url
   token = data.kubernetes_secret.terraform-config-secrets.data.authentik-token
+  insecure = true
 }
 
 provider "kubernetes" {
@@ -31,7 +32,7 @@ provider "kubernetes" {
 locals {
   argocd_redirect_uri = "https://argocd.notusa.uk/api/dex/callback"
   grafana_redirect_uri = "https://grafana.notusa.uk/login/generic_oauth"
-  authentik_url = "https://auth.notusa.uk/"
+  authentik_url = "https://authentik-server/"
 }
 
 data "kubernetes_secret" "terraform-config-secrets" {
