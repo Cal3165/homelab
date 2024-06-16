@@ -7,7 +7,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   name: monitoring-system
-  namespace: monitoring-system
+  namespace: argocd
 spec:
   destination:
     name: in-cluster
