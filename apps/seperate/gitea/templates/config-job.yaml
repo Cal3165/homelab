@@ -4,8 +4,8 @@ metadata:
   name: gitea-config-{{ include (print $.Template.BasePath "/config-source.yaml") . | sha256sum | trunc 7 }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    helm.sh/hook: post-install, post-upgrade
-    helm.sh/hook-delete-policy: before-hook-creation #hook-succeeded
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: hook-succeeded
 spec:
   backoffLimit: 10
   template:
