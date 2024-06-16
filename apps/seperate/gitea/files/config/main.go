@@ -130,6 +130,7 @@ func main() {
 	}
 	log.Printf("Replace Old Config")
 	for _, file := range config.Replacefile {
+		log.Printf("Config: SourcePath=%s, DestPath=%s Branch=%s, Owner=%s, Repo=%s", file.SourcePath, file.DestPath, file.Branch, file.Owner, file.Repo)
 		// Get the content of the source file
 		sourceContents, _, err := client.GetFile(file.Owner, file.Repo, file.Branch, file.SourcePath)
 		if err != nil {
