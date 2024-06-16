@@ -7,6 +7,8 @@ KUBE_CONFIG_PATH = $(KUBECONFIG)
 
 default: system external smoke-test post-install clean
 
+apps: system external
+
 configure:
 	./scripts/configure
 	git status
