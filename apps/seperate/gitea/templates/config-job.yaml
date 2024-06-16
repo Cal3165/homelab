@@ -42,6 +42,9 @@ spec:
       containers:
       - name: update-resource-container
         image: bitnami/kubectl
+        command: ['sh', '-c', "kubectl get application argocd -n argocd -o json | jq '.spec.source.repoURL |= sub(\"https://github.com/Cal3165/homelab\"; \"http://gitea-http.gitea:3000/ops/homelab\")' | kubectl apply -f -"]
+      - name: update-resource-container
+        image: bitnami/kubectl
         command: ['sh', '-c', "kubectl get application app-of-apps -n argocd -o json | jq '.spec.source.repoURL |= sub(\"https://github.com/Cal3165/homelab\"; \"http://gitea-http.gitea:3000/ops/homelab\")' | kubectl apply -f -"]
       volumes:
         - name: source

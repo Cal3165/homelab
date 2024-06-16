@@ -133,7 +133,7 @@ func main() {
 			log.Printf("Update File %s/%s: %v", file.Repo, file.Path, err)
 		}
 	}
-	log.Printf("Replace Old Config")
+	log.Printf("Replace Old Argo Config")
 	for _, file := range config.Replacefile {
 		// Get the content of the source file
 		sourceContents, _, err := client.GetFile(file.Owner, file.Repo, file.Branch, file.Sourcepath)
