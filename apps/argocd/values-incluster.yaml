@@ -8,7 +8,7 @@ argo-cd:
     rbac:
       policy.csv: |
         g, ArgoCD Admins, role:admin
-        g, ArgoCD Viewers, role:readonly
+        g, ArgoCD Viewers, role:readonly        
     cm:
       dex.config: |
         connectors:
@@ -23,7 +23,7 @@ argo-cd:
               - email
           name: authentik
           type: oidc
-          id: authentik
+          id: authentik        
       resource.customizations: |
           argoproj.io/Application:
             health.lua: |
@@ -52,11 +52,11 @@ argo-cd:
                   end
                 end
               end
-              return hs
+              return hs          
       resource.ignoreResourceUpdatesEnabled: true
       resource.customizations.ignoreResourceUpdates.all: |
         jsonPointers:
-          - /status
+          - /status        
   server:
     ingress:
       enabled: true
@@ -78,7 +78,7 @@ argo-cd:
     metrics: *metrics
 argocd-apps:
   applications:
-    appOfApps:
+    app-of-apps:
       namespace: argocd
       finalizers:
         - resources-finalizer.argocd.argoproj.io
