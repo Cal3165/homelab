@@ -54,17 +54,16 @@ kind: ClusterRole
 metadata:
   name: update-argo-apps
 rules:
-  - apiGroups:
-      - "argoproj.io"
-    resources:
-      - applications
-    verbs:
+  - verbs:
       - get
       - list
-      - create
       - update
-      - patch
-      - delete
+      - watch
+    apiGroups:
+      - argoproj.io
+    resources:
+      - applications
+      - applicationsets
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -84,4 +83,4 @@ subjects:
 roleRef:
   kind: ClusterRole
   name: update-argo-apps
-  apiGroup: argoproj.io
+  apiGroup: rbac.authorization.k8s.io
