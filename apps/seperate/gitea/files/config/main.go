@@ -112,7 +112,7 @@ func main() {
 		}
 	}
 	log.Printf("Updating Files")
-	log.Printf("Config: %s", config.Files)
+	log.Printf("Config: %s", config.Files[1].Path)
 	for _, file := range config.Files {
 		contentsResponse, _, err := client.GetContents(file.Owner, file.Repo, file.Branch, file.Path)
 		if err != nil {
