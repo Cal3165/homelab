@@ -1,7 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  argocd.argoproj.io/sync-wave: "5"
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
   name: apps
   namespace: argocd
 spec:
