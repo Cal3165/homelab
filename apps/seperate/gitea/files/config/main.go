@@ -113,12 +113,12 @@ func main() {
 	}
 	log.Printf("Updating Files")
 	for _, file := range config.Files {
-		log.Printf("Config: Path=%s, Branch=%s, Owner=%s, Repo=%s", file.Path, file.Branch, file.Owner, file.Repo)
 		contentsResponse, _, err := client.GetContents(file.Owner, file.Repo, file.Branch, file.Path)
 		if err != nil {
 			log.Printf("Get File For Update %s/%s: %v", file.Repo, file.Path, err)
 		}
 		updatedContent := strings.Replace(*contentsResponse.Content, "https://github.com/Cal3165/homelab", "http://gitea-http.gitea:3000/ops/homelab", -1)
+		log.Printf("Config: %s", *contentsResponse.Content)
 		updateOptions := gitea.UpdateFileOptions{
 			SHA:     contentsResponse.SHA,
 			Content: updatedContent,
@@ -130,7 +130,6 @@ func main() {
 	}
 	log.Printf("Replace Old Config")
 	for _, file := range config.Replacefile {
-		log.Printf("Config: SourcePath=%s, DestPath=%s Branch=%s, Owner=%s, Repo=%s", file.Sourcepath, file.Destpath, file.Branch, file.Owner, file.Repo)
 		// Get the content of the source file
 		sourceContents, _, err := client.GetFile(file.Owner, file.Repo, file.Branch, file.Sourcepath)
 		if err != nil {
