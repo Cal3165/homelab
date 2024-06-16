@@ -54,8 +54,8 @@ files:
     repo: homelab
     branch: master
 replacefile:
-  - source: apps/argocd/values-incluster.yaml
-    dest: apps/argocd/values.yaml
+  - sourcepath: apps/argocd/values-incluster.yaml
+    destpath: apps/argocd/values.yaml
     owner: ops
     repo: homelab
     branch: master

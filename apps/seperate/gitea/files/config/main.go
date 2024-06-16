@@ -34,8 +34,8 @@ type File struct {
 }
 
 type Replacefile struct {
-	SourcePath string
-	DestPath   string
+	Sourcepath string
+	Destpath   string
 	Owner      string
 	Repo       string
 	Branch     string
@@ -130,17 +130,17 @@ func main() {
 	}
 	log.Printf("Replace Old Config")
 	for _, file := range config.Replacefile {
-		log.Printf("Config: SourcePath=%s, DestPath=%s Branch=%s, Owner=%s, Repo=%s", file.SourcePath, file.DestPath, file.Branch, file.Owner, file.Repo)
+		log.Printf("Config: SourcePath=%s, DestPath=%s Branch=%s, Owner=%s, Repo=%s", file.Sourcepath, file.Destpath, file.Branch, file.Owner, file.Repo)
 		// Get the content of the source file
-		sourceContents, _, err := client.GetFile(file.Owner, file.Repo, file.Branch, file.SourcePath)
+		sourceContents, _, err := client.GetFile(file.Owner, file.Repo, file.Branch, file.Sourcepath)
 		if err != nil {
-			log.Printf("Get Original File For Replace %s/%s: %v", file.Repo, file.SourcePath, err)
+			log.Printf("Get Original File For Replace %s/%s: %v", file.Repo, file.Sourcepath, err)
 		}
 
 		// Get the SHA of the target file
-		targetContents, _, err := client.GetContents(file.Owner, file.Repo, file.Branch, file.DestPath)
+		targetContents, _, err := client.GetContents(file.Owner, file.Repo, file.Branch, file.Destpath)
 		if err != nil {
-			log.Printf("Get New File For Replace %s/%s: %v", file.Repo, file.DestPath, err)
+			log.Printf("Get New File For Replace %s/%s: %v", file.Repo, file.Destpath, err)
 		}
 
 		// Update the target file with the content of the source file
