@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   argocd.argoproj.io/sync-wave: "4"
-  name: root
+  name: platform
   namespace: argocd
 spec:
   generators:
