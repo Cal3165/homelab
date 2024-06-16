@@ -75,7 +75,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: authentik-terraform-remote-secret
+  name: argocd-update-apps
   namespace: {{ .Release.Namespace }}
 subjects:
   - kind: ServiceAccount

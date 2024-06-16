@@ -123,9 +123,6 @@ func main() {
 			return
 		}
 		updatedContent := strings.Replace(string(decodedBytes), "https://github.com/Cal3165/homelab", "http://gitea-http.gitea:3000/ops/homelab", -1)
-
-		log.Printf("Original: %s", string(decodedBytes))
-		log.Printf("Updated: %s", updatedContent)
 		updateOptions := gitea.UpdateFileOptions{
 			SHA:     contentsResponse.SHA,
 			Content: base64.StdEncoding.EncodeToString([]byte(updatedContent)),
