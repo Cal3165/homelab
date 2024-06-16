@@ -3,8 +3,10 @@ package main
 // TODO WIP clean this up
 
 import (
+	"encoding/base64"
 	"log"
 	"os"
+	"strings"
 
 	"code.gitea.io/sdk/gitea"
 	"gopkg.in/yaml.v2"
@@ -24,10 +26,17 @@ type Repository struct {
 		Mirror bool
 	}
 }
+type File struct {
+	Path   string
+	Owner  string
+	Repo   string
+	Branch string
+}
 
 type Config struct {
 	Organizations []Organization
 	Repositories  []Repository
+	Files         []File
 }
 
 func main() {
@@ -88,6 +97,25 @@ func main() {
 				// Description: "TODO",
 				Private: repo.Private,
 			})
+			if err != nil {
+				log.Printf("Create %s/%s: %v", repo.Owner, repo.Name, err)
+			}
 		}
 	}
+	for _, file := range config.Files {
+		contentsResponse, _, err := client.GetContents(file.Owner, file.Repo, file.Branch, file.Path)
+		if err != nil {
+			log.Printf("Get File %s/%s: %v", file.Repo, file.Path, err)
+		}
+		updatedContent := strings.Replace(*contentsResponse.Content, "https://github.com/Cal3165/homelab", "http://gitea-http.gitea:3000/ops/homelab", -1)
+		updateOptions := gitea.UpdateFileOptions{
+			SHA:     contentsResponse.SHA,
+			Content: base64.StdEncoding.EncodeToString([]byte(updatedContent)),
+		}
+		_, _, err = client.UpdateFile(file.Owner, file.Repo, file.Path, updateOptions)
+		if err != nil {
+			log.Printf("Update File %s/%s: %v", file.Repo, file.Path, err)
+		}
+	}
+
 }

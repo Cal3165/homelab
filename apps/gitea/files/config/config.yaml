@@ -28,3 +28,16 @@ repositories:
     migrate:
       source: https://github.com/khuedoan/backstage
       mirror: true
+files:
+  - path: appOfApps/0-base.yaml
+    owner: ops
+    repo: homelab
+    branch: master
+  - path: appOfApps/1-authentik.yaml
+    owner: ops
+    repo: homelab
+    branch: master
+  - path: appOfApps/2-gitea.yaml
+    owner: ops
+    repo: homelab
+    branch: master

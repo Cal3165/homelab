@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  argocd.argoproj.io/sync-wave: "0"
+  name: root
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: &repoURL https://github.com/Cal3165/homelab
+        revision: &revision master
+        directories:
+          - path: apps/base/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      destination:
+        name: in-cluster
+        namespace: '{{path.basename}}'
+      project: default  # TODO
+      source:
+        repoURL: *repoURL
+        path: '{{path}}'
+        targetRevision: *revision
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 10
+          backoff:
+            duration: 1m
+            factor: 2
+            maxDuration: 16m
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true
+
+      
