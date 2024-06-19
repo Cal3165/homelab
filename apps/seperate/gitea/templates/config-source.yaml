@@ -3,5 +3,8 @@ kind: ConfigMap
 metadata:
   name: gitea-config-source
   namespace: {{ .Release.Namespace }}
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: hook-succeeded
 data:
 {{ (.Files.Glob "files/config/*").AsConfig | indent 2 }}
