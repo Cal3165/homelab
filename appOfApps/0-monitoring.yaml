@@ -14,7 +14,7 @@ spec:
     namespace: monitoring-system
   project: default
   source:
-    path: apps/seperate/monitoring-system
+    path: apps/seperate/base/monitoring-system
     repoURL: https://github.com/Cal3165/homelab
     targetRevision: master
   syncPolicy:
