@@ -40,10 +40,10 @@ spec:
             - name: source
               mountPath: /go/src/gitea-config
       containers:
-      - name: update-resource-container-a
-        image: bitnami/kubectl
-        command: ['sh', '-c', "kubectl get application argocd -n argocd -o json | jq '.spec.source.repoURL |= sub(\"https://github.com/Cal3165/homelab\"; \"http://gitea-http.gitea:3000/ops/homelab\")' | kubectl apply -f -"]
-      - name: update-resource-container-b
+      # - name: update-resource-container-a
+      #   image: bitnami/kubectl
+      #   command: ['sh', '-c', "kubectl get application argocd -n argocd -o json | jq '.spec.source.repoURL |= sub(\"https://github.com/Cal3165/homelab\"; \"http://gitea-http.gitea:3000/ops/homelab\")' | kubectl apply -f -"]
+      - name: update-resource-container-appofapps
         image: bitnami/kubectl
         command: ['sh', '-c', "kubectl get application app-of-apps -n argocd -o json | jq '.spec.source.repoURL |= sub(\"https://github.com/Cal3165/homelab\"; \"http://gitea-http.gitea:3000/ops/homelab\")' | kubectl apply -f -"]
       volumes:
