@@ -5,9 +5,10 @@ csi-driver-nfs:
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchLabels:
-                app: csi-nfs-controller
+          - topologyKey: kubernetes.io/hostname
+            labelSelector:
+                matchLabels:
+                  app: csi-nfs-controller
   storageClass:
     create: true
     name: nfs-csi
