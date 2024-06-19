@@ -20,7 +20,7 @@ module "authentik_secrets" {
 module "turn_password" {
   source = "./modules/extra-secrets"
   data   = var.turn_password
-  name = "turn_password"
+  name = "turn-password"
 }
 
 module "extra_secrets" {
