@@ -2,8 +2,8 @@
     "ansible.python.interpreterPath": "/bin/python3",
     "yaml.schemas": {
         "https://github.com/siderolabs/talos/raw/main/website/content/v1.7/schemas/v1alpha1_config.schema.json": [
-            "file:///root/homelab/omni/cluster.yaml",
-            "file:///root/homelab/omni/controlplane.yaml"
+            "file:///root/homelab/omni/cluster_patch.yaml",
+            "file:///root/homelab/omni/controlplane_patch.yaml"
         ]
     }
 }

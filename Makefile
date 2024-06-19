@@ -9,6 +9,9 @@ default: system external smoke-test post-install clean
 
 apps: system external
 
+omni:
+	./omni/omnictl --omniconfig ./omni/config.yaml cluster template sync --file ./omni/cluster.yaml
+
 configure:
 	./scripts/configure
 	git status
