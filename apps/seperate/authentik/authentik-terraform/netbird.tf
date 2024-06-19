@@ -40,6 +40,6 @@ resource "authentik_user" "netbird" {
   type     = "service_account"
   path     = "goauthentik.io/service-accounts"
   password = data.kubernetes_secret.terraform-config-secrets.data.netbird-token
-  groups = data.authentik_group.akadmins.id
+  groups = [data.authentik_group.akadmins.id]
   attributes = "{'goauthentik.io/user/token-expires': false}"
 }
