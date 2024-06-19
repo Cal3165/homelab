@@ -6,15 +6,15 @@ metadata:
     argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  name: ingress-nginx
+  name: longhorn
   namespace: argocd
 spec:
   destination:
     name: in-cluster
-    namespace: ingress-nginx
+    namespace: longhorn
   project: default
   source:
-    path: apps/seperate/base/ingress-nginx
+    path: apps/seperate/base/longhorn
     repoURL: https://github.com/Cal3165/homelab
     targetRevision: master
   syncPolicy:
