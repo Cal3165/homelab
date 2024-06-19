@@ -3,6 +3,9 @@ kind: RoleBinding
 metadata:
   name: authentik-terraform-secrets
   namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded
 subjects:
   - kind: ServiceAccount
     name: authentik-terraform
@@ -16,6 +19,9 @@ kind: RoleBinding
 metadata:
   name: authentik-terraform-leases
   namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded
 subjects:
   - kind: ServiceAccount
     name: authentik-terraform
@@ -29,6 +35,9 @@ kind: RoleBinding
 metadata:
   name: authentik-terraform-remote-secret
   namespace: global-secrets
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded
 subjects:
   - kind: ServiceAccount
     name: authentik-terraform

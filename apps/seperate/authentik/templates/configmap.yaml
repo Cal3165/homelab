@@ -2,6 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-terraform-configmap
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded
 data:
 {{- range $path, $_ :=  .Files.Glob  "authentik-terraform/*.tf" }}    
   {{ $path | trimPrefix "authentik-terraform/" }}: |- 
