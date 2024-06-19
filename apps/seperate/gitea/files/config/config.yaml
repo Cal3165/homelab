@@ -19,7 +19,7 @@ repositories:
       source: https://github.com/Cal3165/homelab
       mirror: false
 files:
-  - path: appOfApps/0-argocd.yaml
+  - path: appOfApps/100-argocd.yaml
     owner: ops
     repo: homelab
     branch: master
