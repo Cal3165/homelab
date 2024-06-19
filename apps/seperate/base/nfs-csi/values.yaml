@@ -10,12 +10,4 @@ csi-driver-nfs:
                 matchLabels:
                   app: csi-nfs-controller
   storageClass:
-    create: true
-    name: nfs-csi
-    annotations:
-      storageclass.kubernetes.io/is-default-class: "true"
-    parameters:
-      server: 10.0.0.11
-      share: /mnt/HDD/Apps
-    reclaimPolicy: Delete
-    volumeBindingMode: Immediate
+    create: false
