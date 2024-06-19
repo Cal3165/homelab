@@ -42,6 +42,10 @@ data "kubernetes_secret" "terraform-config-secrets" {
   }
 }
 
+data "authentik_certificate_key_pair" "generated" {
+  name = "authentik Self-signed Certificate"
+}
+
 # Defualts
 data "authentik_scope_mapping" "scope-email" {
   name = "authentik default OAuth Mapping: OpenID 'email'"
@@ -54,8 +58,12 @@ data "authentik_scope_mapping" "scope-profile" {
 data "authentik_scope_mapping" "scope-openid" {
   name = "authentik default OAuth Mapping: OpenID 'openid'"
 }
-# Create a scope mapping
 
+data "authentik_scope_mapping" "scope-offline-access" {
+  name = "authentik default OAuth Mapping: OpenID 'offline_access'"
+}
+
+# Create a scope mapping
 resource "authentik_scope_mapping" "gitea" {
   name       = "authentik gitea OAuth Mapping: OpenID 'gitea'"
   scope_name = "gitea"

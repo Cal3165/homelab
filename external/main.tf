@@ -17,6 +17,12 @@ module "authentik_secrets" {
   name = "authentik-secrets"
 }
 
+module "turn_password" {
+  source = "./modules/extra-secrets"
+  data   = var.turn_password
+  name = "turn_password"
+}
+
 module "extra_secrets" {
   source = "./modules/extra-secrets"
   data   = var.extra_secrets

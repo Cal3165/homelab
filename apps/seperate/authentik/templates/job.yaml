@@ -39,6 +39,8 @@ spec:
             path: "odic_apps.tf"
           - key: "users.tf"
             path: "users.tf"
+          - key: "netbird.tf"
+            path: "netbird.tf"
           - key: "odic_app_main.tf"
             path: "modules/odic_app/main.tf"
           - key: "odic_app_outputs.tf"
