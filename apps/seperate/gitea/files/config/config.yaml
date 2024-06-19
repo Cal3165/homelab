@@ -18,16 +18,6 @@ repositories:
     migrate:
       source: https://github.com/Cal3165/homelab
       mirror: false
-  - name: blog
-    owner: khuedoan
-    migrate:
-      source: https://github.com/khuedoan/blog
-      mirror: true
-  - name: backstage
-    owner: khuedoan
-    migrate:
-      source: https://github.com/khuedoan/backstage
-      mirror: true
 files:
   - path: appOfApps/0-argocd.yaml
     owner: ops
