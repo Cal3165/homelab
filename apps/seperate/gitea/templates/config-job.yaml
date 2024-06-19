@@ -40,10 +40,10 @@ spec:
             - name: source
               mountPath: /go/src/gitea-config
       containers:
-      - name: update-resource-container
+      - name: update-resource-container-a
         image: bitnami/kubectl
         command: ['sh', '-c', "kubectl get application argocd -n argocd -o json | jq '.spec.source.repoURL |= sub(\"https://github.com/Cal3165/homelab\"; \"http://gitea-http.gitea:3000/ops/homelab\")' | kubectl apply -f -"]
-      - name: update-resource-container
+      - name: update-resource-container-b
         image: bitnami/kubectl
         command: ['sh', '-c', "kubectl get application app-of-apps -n argocd -o json | jq '.spec.source.repoURL |= sub(\"https://github.com/Cal3165/homelab\"; \"http://gitea-http.gitea:3000/ops/homelab\")' | kubectl apply -f -"]
       volumes:
@@ -56,6 +56,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: update-argo-apps
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: hook-succeeded
 rules:
   - verbs:
       - get
@@ -74,12 +77,18 @@ kind: ServiceAccount
 metadata:
   name: argocd-update
   namespace: {{ .Release.Namespace }}
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: hook-succeeded
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: argocd-update-apps
   namespace: argocd
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: hook-succeeded
 subjects:
   - kind: ServiceAccount
     name: argocd-update
