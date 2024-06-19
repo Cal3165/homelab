@@ -41,6 +41,10 @@ files:
     owner: ops
     repo: homelab
     branch: master
+  - path: appOfApps/1-nfs-csi.yaml
+    owner: ops
+    repo: homelab
+    branch: master
   - path: appOfApps/1-cert-manager.yaml
     owner: ops
     repo: homelab

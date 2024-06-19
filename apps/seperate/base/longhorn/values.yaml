@@ -3,3 +3,5 @@ longhorn:
     defaultClass: false
   preUpgradeChecker:
     jobEnabled: false
+  defaultSettings:
+    defaultReplicaCount: 2

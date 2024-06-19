@@ -12,6 +12,9 @@ apps: system external
 omni:
 	./omni/omnictl --omniconfig ./omni/config.yaml cluster template sync --file ./omni/cluster.yaml
 
+omni-delete:
+	./omni/omnictl --omniconfig ./omni/config.yaml cluster template delete --file ./omni/cluster.yaml
+
 configure:
 	./scripts/configure
 	git status
