@@ -1,7 +1,9 @@
 traefik:
+  globalArguments:
+  - "--global.checknewversion"
+  - "--providers.kubernetesgateway.experimentalchannel=true"
   experimental:
     kubernetesGateway:
-      experimentalChannel: true
       enabled: true
       namespacePolicy: All
       annotations:
