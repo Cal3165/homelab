@@ -6,8 +6,6 @@ traefik:
     kubernetesGateway:
       enabled: true
       namespacePolicy: All
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-prod
       certificate:
         name: notusa-uk-cert
   ports:
