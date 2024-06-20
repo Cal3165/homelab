@@ -44,28 +44,28 @@ spec:
         requestRedirect:
           scheme: https
           statusCode: 301 
-# ---
-# apiVersion: gateway.networking.k8s.io/v1alpha2
-# kind: GRPCRoute
-# metadata:
-#   name: vpn-grpc
-#   namespace: {{ .Release.Namespace }}
-# spec:
-#   parentRefs:
-#     - name: traefik-gateway
-#       namespace: traefik
-#   hostnames:
-#     - vpn.notusa.uk
-#   rules:
-#     - matches:
-#       - method:
-#           service: signalexchange.SignalExchange
-#       backendRefs:
-#       - name: {{ .Release.Name }}-signal
-#         port: 80
-#     - matches:
-#       - method:
-#           service: management.ManagementService
-#       backendRefs:
-#       - name: {{ .Release.Name }}-management
-#         port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: GRPCRoute
+metadata:
+  name: vpn-grpc
+  namespace: {{ .Release.Namespace }}
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+  hostnames:
+    - vpn.notusa.uk
+  rules:
+    - matches:
+      - method:
+          service: signalexchange.SignalExchange
+      backendRefs:
+      - name: {{ .Release.Name }}-signal
+        port: 80
+    - matches:
+      - method:
+          service: management.ManagementService
+      backendRefs:
+      - name: {{ .Release.Name }}-management
+        port: 80
