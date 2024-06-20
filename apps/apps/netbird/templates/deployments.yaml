@@ -176,10 +176,6 @@ spec:
             - "--single-account-mode-domain=vpn.notusa.uk"
             - "--dns-domain=netbird.selfhosted"
           ports:
-            - name: api
-              containerPort: 80
-              protocol: TCP
-              hostPort: null
             - name: management
               containerPort: 80
               protocol: TCP

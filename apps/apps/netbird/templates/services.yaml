@@ -11,7 +11,7 @@ spec:
   type: ClusterIP
   publishNotReadyAddresses: false
   ports:
-    - name: api
+    - name: management
       port: 80
       protocol: TCP
       targetPort: 80
