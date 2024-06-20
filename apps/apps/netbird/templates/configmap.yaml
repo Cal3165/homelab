@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netbird-dash-env
+  namespace: {{ .Release.Namespace }}
+data:
+  AUTH_AUTHORITY: https://auth.notusa.uk/application/o/netbird/
+  AUTH_CLIENT_SECRET: null
+  AUTH_REDIRECT_URI: null
+  AUTH_SILENT_REDIRECT_URI: null
+  AUTH_SUPPORTED_SCOPES: openid profile email offline_access api
+  LETSENCRYPT_DOMAIN: notusa.uk
+  LETSENCRYPT_EMAIL: Clave.pupal-0i@icloud.com
+  NETBIRD_MGMT_API_ENDPOINT: https://vpn.notusa.uk:443
+  NETBIRD_MGMT_GRPC_API_ENDPOINT: https://vpn.notusa.uk:443
+  NETBIRD_TOKEN_SOURCE: accessToken
+  NGINX_SSL_PORT: "443"
+  USE_AUTH0: "false"
+---

@@ -1,0 +1,105 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-api
+  namespace: {{ .Release.Namespace }}
+  labels:
+    service.name: "api"
+  annotations:
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: false
+  ports:
+    - name: api
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    pod.name: management
+    app.kubernetes.io/name: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    service.name: "main"
+  annotations:
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: false
+  ports:
+    - name: main
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    pod.name: main
+    app.kubernetes.io/name: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-management
+  namespace: {{ .Release.Namespace }}
+  labels:
+    service.name: "management"
+  annotations:
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+    traefik.ingress.kubernetes.io/service.serversscheme: "h2c"
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: false
+  ports:
+    - name: management
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    pod.name: management
+    app.kubernetes.io/name: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-metrics
+  namespace: {{ .Release.Namespace }}
+  labels:
+    service.name: "metrics"
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: false
+  ports:
+    - name: metrics
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    pod.name: management
+    app.kubernetes.io/name: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-signal
+  namespace: {{ .Release.Namespace }}
+  labels:
+    service.name: "signal"
+  annotations:
+    traefik.ingress.kubernetes.io/service.passhostheader: "true"
+    traefik.ingress.kubernetes.io/service.serversscheme: "h2c"
+spec:
+  type: ClusterIP
+  publishNotReadyAddresses: false
+  ports:
+    - name: signal
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    pod.name: signal
+    app.kubernetes.io/name: {{ .Release.Name }}
+---

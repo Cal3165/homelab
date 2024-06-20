@@ -1,0 +1,366 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:  
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      pod.name: main
+      app.kubernetes.io/name: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        pod.lifecycle: "permanent"
+        pod.name: "main"
+    spec:
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 568
+        sysctls:
+          - name: "net.ipv4.ip_unprivileged_port_start"
+            value: "80"
+      hostUsers: true
+      containers:
+        - name: netbird
+          image: netbirdio/dashboard:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - "/bin/sh"
+            - "-c"
+          args:
+            - "mkdir -p /run/nginx; /usr/bin/supervisord -c /etc/supervisord.conf"
+          ports:
+            - name: main
+              containerPort: 80
+              protocol: TCP
+              hostPort: null
+          volumeMounts:
+            - name: letsencrypt
+              mountPath: /etc/letsencrypt/
+              readOnly: false
+          livenessProbe:
+            httpGet:
+              port: main
+              path: /
+              scheme: HTTP
+            initialDelaySeconds: 10
+            failureThreshold: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: main
+              path: /
+              scheme: HTTP
+            initialDelaySeconds: 10
+            failureThreshold: 5
+            successThreshold: 2
+            timeoutSeconds: 5
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              port: main
+              path: /
+              scheme: HTTP
+            initialDelaySeconds: 10
+            failureThreshold: 60
+            successThreshold: 1
+            timeoutSeconds: 2
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 10m
+              memory: 50Mi
+            limits: 
+              cpu: 4000m 
+              memory: 8Gi
+          securityContext:
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+            privileged: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+                - CHOWN
+                - SETUID
+                - SETGID
+                - FOWNER
+                - DAC_OVERRIDE
+              drop:
+                - ALL
+          envFrom:
+            - configMapRef:
+                name: "netbird-dash-env"
+          env:
+            - name: "UMASK"
+              value: "0022"
+            - name: "UMASK_SET"
+              value: "0022"
+            - name: "PUID"
+              value: "568"
+            - name: "USER_ID"
+              value: "568"
+            - name: "UID"
+              value: "568"
+            - name: "PGID"
+              value: "568"
+            - name: "GROUP_ID"
+              value: "568"
+            - name: "GID"
+              value: "568"
+            - name: "AUTH_AUDIENCE"
+              valueFrom:
+                secretKeyRef:
+                  key: "client-id"
+                  name: "netbird-generated-secret"
+            - name: "AUTH_CLIENT_ID"
+              valueFrom:
+                secretKeyRef:
+                  key: "client-id"
+                  name: "netbird-generated-secret"
+      volumes:
+        - name: letsencrypt
+          persistentVolumeClaim:
+            claimName: netbird-letsencrypt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-management
+  namespace: {{ .Release.Namespace }}
+spec:  
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      pod.name: management
+      app.kubernetes.io/name: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        pod.name: "management"
+    spec:
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 568
+        sysctls:
+          - name: "net.ipv4.ip_unprivileged_port_start"
+            value: "80"
+      hostUsers: true
+      containers:
+        - name: netbird
+          image: netbirdio/management:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--port"
+            - "80"
+            - "--log-file"
+            - "console"
+            - "--disable-anonymous-metrics=true"
+            - "--single-account-mode-domain=vpn.notusa.uk"
+            - "--dns-domain=netbird.selfhosted"
+          ports:
+            - name: api
+              containerPort: 80
+              protocol: TCP
+              hostPort: null
+            - name: management
+              containerPort: 80
+              protocol: TCP
+              hostPort: null
+            - name: metrics
+              containerPort: 8081
+              protocol: TCP
+              hostPort: null
+          volumeMounts:
+            - name: letsencrypt
+              mountPath: /etc/letsencrypt/
+              readOnly: true
+            - name: management
+              mountPath: /etc/netbird/
+              readOnly: false
+            - name: mgmt
+              mountPath: /var/lib/netbird
+              readOnly: false
+          resources:
+            requests:
+              cpu: 10m
+              memory: 50Mi
+            limits: 
+              cpu: 4000m 
+              memory: 8Gi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            privileged: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+              drop:
+                - ALL
+          env:
+            - name: "UMASK"
+              value: "0022"
+            - name: "UMASK_SET"
+              value: "0022"
+            - name: "S6_READ_ONLY_ROOT"
+              value: "1"
+      initContainers:
+        - name: netbird-init-mountconfig
+          image: alpine:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - "cp"
+            - "/etc/netbirdmap/management.json"
+            - "/etc/netbird/management.json"
+          volumeMounts:
+            - name: management
+              mountPath: /etc/netbird/
+              readOnly: false
+            - name: managementconf
+              mountPath: /etc/netbirdmap/management.json
+              readOnly: false
+              subPath: management.json
+          resources:
+            requests:
+              cpu: 10m
+              memory: 50Mi
+            limits: 
+              cpu: 4000m 
+              memory: 8Gi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            privileged: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+              drop:
+                - ALL
+          env:
+            - name: "UMASK"
+              value: "0022"
+            - name: "UMASK_SET"
+              value: "0022"
+            - name: "S6_READ_ONLY_ROOT"
+              value: "1"
+      volumes:
+        - name: letsencrypt
+          persistentVolumeClaim:
+            claimName: netbird-letsencrypt
+        - name: management
+          persistentVolumeClaim:
+            claimName: netbird-management
+        - name: managementconf
+          secret:
+            secretName: netbird-management-config-secret
+            defaultMode: 0777
+            optional: true
+            items:
+            - key: management.json
+              path: management.json
+        - name: mgmt
+          persistentVolumeClaim:
+            claimName: netbird-mgmt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-signal
+  namespace: {{ .Release.Namespace }}
+spec:  
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      pod.name: signal
+      app.kubernetes.io/name: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        pod.name: "signal"
+    spec:
+      securityContext:
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 568
+        sysctls:
+          - name: "net.ipv4.ip_unprivileged_port_start"
+            value: "80"
+      hostUsers: true
+      containers:
+        - name: netbird
+          image: netbirdio/signal:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: signal
+              containerPort: 80
+              protocol: TCP
+              hostPort: null
+          volumeMounts:
+            - name: signal
+              mountPath: /var/lib/netbird
+              readOnly: false
+          resources:
+            requests:
+              cpu: 10m
+              memory: 50Mi
+            limits: 
+              cpu: 4000m 
+              memory: 8Gi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 568
+            runAsGroup: 568
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            privileged: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+              drop:
+                - ALL
+          env:
+            - name: "UMASK"
+              value: "0022"
+            - name: "UMASK_SET"
+              value: "0022"
+            - name: "S6_READ_ONLY_ROOT"
+              value: "1"
+      volumes:
+        - name: signal
+          persistentVolumeClaim:
+            claimName: netbird-signal
+---
