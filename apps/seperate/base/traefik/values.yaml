@@ -1,6 +1,7 @@
 traefik:
   experimental:
     kubernetesGateway:
+      experimentalChannel: true
       enabled: true
       namespacePolicy: All
       annotations:
