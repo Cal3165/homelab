@@ -1,7 +1,7 @@
 apiVersion: v2
-name: traefik
+name: traefik-crds
 version: 0.0.0
 dependencies:
-  - name: traefik
+  - name: traefik-crds
     version: 29.1.2
     repository: oci://tccr.io/truecharts
