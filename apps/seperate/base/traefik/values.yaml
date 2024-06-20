@@ -10,27 +10,28 @@ traefik:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       certificate:
         name: notusa-uk-CERT
-    # ldap:
-    #   port: 389
-    #   exposedPort: 389
-    #   protocol: tcp
-    #   expose:
-    #     default: true
-    #   forwardedHeaders:
-    #     enabled: false
-    #   tls:
-    #     enabled: false
-    # ldaps:
-    #   enabled: true
-    #   port: 636
-    #   exposedPort: 636
-    #   protocol: tcp
-    #   expose:
-    #     default: true
-    #   forwardedHeaders:
-    #     enabled: false
-    #   tls:
-    #     enabled: false
+  ports:
+    ldap:
+      port: 389
+      exposedPort: 389
+      protocol: tcp
+      expose:
+        default: true
+      forwardedHeaders:
+        enabled: false
+      tls:
+        enabled: false
+    ldaps:
+      enabled: true
+      port: 636
+      exposedPort: 636
+      protocol: tcp
+      expose:
+        default: true
+      forwardedHeaders:
+        enabled: false
+      tls:
+        enabled: false
   ingressRoute:
     dashboard:
       enabled: false
