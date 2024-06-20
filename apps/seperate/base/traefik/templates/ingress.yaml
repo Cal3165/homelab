@@ -62,7 +62,7 @@ spec:
           kind: Middleware
           name: authentik
     - filters:
-        type: RequestRedirect
+      - type: RequestRedirect
         requestRedirect:
           scheme: https
           statusCode: 301 
