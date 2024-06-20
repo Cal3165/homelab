@@ -1,0 +1,45 @@
+traefik:
+  experimental:
+    kubernetesGateway:
+      enabled: true
+      namespacePolicy: All
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      certificate:
+        name: notusa-uk-CERT
+  
+  ports:
+    web:
+      port: 80
+    websecure:
+      port: 443
+    # ldap:
+    #   port: 389
+    #   exposedPort: 389
+    #   protocol: tcp
+    #   expose:
+    #     default: true
+    #   forwardedHeaders:
+    #     enabled: false
+    #   tls:
+    #     enabled: false
+    # ldaps:
+    #   enabled: true
+    #   port: 636
+    #   exposedPort: 636
+    #   protocol: tcp
+    #   expose:
+    #     default: true
+    #   forwardedHeaders:
+    #     enabled: false
+    #   tls:
+    #     enabled: false
+  ingressRoute:
+    dashboard:
+      enabled: false
+      # annotations: {}
+      # matchRule: Host(`traefik.notusa.uk`)
+      # entryPoints: ["web"]
+      # middlewares: ["authentik"]
+      # tls: {}
+
