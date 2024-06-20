@@ -28,14 +28,14 @@ spec:
     - matches:
       - path:
           type: PathPrefix
-          value: /signalexchange
+          value: /signalexchange.SignalExchange
       backendRefs:
         - name: {{ .Release.Name }}-signal
           port: 80
     - matches:
       - path:
           type: PathPrefix
-          value: /management
+          value: /management.ManagementService
       backendRefs:
         - name: {{ .Release.Name }}-management
           port: 80
