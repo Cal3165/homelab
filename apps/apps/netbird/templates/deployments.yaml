@@ -103,7 +103,7 @@ spec:
                 - ALL
           envFrom:
             - configMapRef:
-                name: "netbird-dash-env"
+                name: "{{ .Release.Name }}-dash-env"
           env:
             - name: "UMASK"
               value: "0022"
@@ -125,16 +125,16 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: "client-id"
-                  name: "netbird-generated-secret"
+                  name: "{{ .Release.Name }}-generated-secret"
             - name: "AUTH_CLIENT_ID"
               valueFrom:
                 secretKeyRef:
                   key: "client-id"
-                  name: "netbird-generated-secret"
+                  name: "{{ .Release.Name }}-generated-secret"
       volumes:
         - name: letsencrypt
           persistentVolumeClaim:
-            claimName: netbird-letsencrypt
+            claimName: {{ .Release.Name }}-letsencrypt
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -228,7 +228,7 @@ spec:
             - name: "S6_READ_ONLY_ROOT"
               value: "1"
       initContainers:
-        - name: netbird-init-mountconfig
+        - name: {{ .Release.Name }}-init-mountconfig
           image: alpine:latest
           imagePullPolicy: IfNotPresent
           command:
@@ -274,13 +274,13 @@ spec:
       volumes:
         - name: letsencrypt
           persistentVolumeClaim:
-            claimName: netbird-letsencrypt
+            claimName: {{ .Release.Name }}-letsencrypt
         - name: management
           persistentVolumeClaim:
-            claimName: netbird-management
+            claimName: {{ .Release.Name }}-management
         - name: managementconf
           secret:
-            secretName: netbird-management-config-secret
+            secretName: {{ .Release.Name }}-management-config-secret
             defaultMode: 0777
             optional: true
             items:
@@ -288,7 +288,7 @@ spec:
               path: management.json
         - name: mgmt
           persistentVolumeClaim:
-            claimName: netbird-mgmt
+            claimName: {{ .Release.Name }}-mgmt
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -362,5 +362,5 @@ spec:
       volumes:
         - name: signal
           persistentVolumeClaim:
-            claimName: netbird-signal
+            claimName: {{ .Release.Name }}-signal
 ---
