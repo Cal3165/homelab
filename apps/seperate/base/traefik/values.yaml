@@ -14,7 +14,7 @@ traefik:
     ldap:
       port: 389
       exposedPort: 389
-      protocol: tcp
+      protocol: TCP
       expose:
         default: true
       forwardedHeaders:
@@ -25,7 +25,7 @@ traefik:
       enabled: true
       port: 636
       exposedPort: 636
-      protocol: tcp
+      protocol: TCP
       expose:
         default: true
       forwardedHeaders:
