@@ -14,14 +14,14 @@ spec:
     - matches:
       - path:
         type: PathPrefix
-        value: /api
+          value: /api
       backendRefs:
         - name: {{ .Release.Name }}-api
           port: 80
     - matches:
       - path:
         type: PathPrefix
-        value: /
+          value: /
       backendRefs:
         - name: {{ .Release.Name }}
           port: 80
@@ -55,8 +55,3 @@ spec:
       backendRefs:
       - name: {{ .Release.Name }}-management
         port: 80
-    - filters:
-      - type: RequestRedirect
-        requestRedirect:
-          scheme: https
-          statusCode: 301
