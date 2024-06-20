@@ -48,6 +48,7 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: {{ .Release.Namespace }}
+      sectionName: websecure
   hostnames:
     - traefik.notusa.uk
   rules:
@@ -61,6 +62,21 @@ spec:
           group: traefik.io
           kind: Middleware
           name: authentik
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: traefik-dashboard
+  namespace: {{ .Release.Namespace }}
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: {{ .Release.Namespace }}
+      sectionName: web
+  hostnames:
+    - traefik.notusa.uk
+  rules:
+    - filters:
       - type: RequestRedirect
         requestRedirect:
           scheme: https
