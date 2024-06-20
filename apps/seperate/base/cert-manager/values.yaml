@@ -4,3 +4,5 @@ cert-manager:
     enabled: true
     servicemonitor:
       enabled: true
+  args:
+    - --enable-gateway-api

@@ -9,7 +9,7 @@ traefik:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       certificate:
-        name: notusa-uk-CERT
+        name: notusa-uk-cert
   ports:
     web:
       port: 80
