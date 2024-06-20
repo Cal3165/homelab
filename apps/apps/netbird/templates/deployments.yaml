@@ -13,9 +13,6 @@ spec:
       pod.name: main
       app.kubernetes.io/name: {{ .Release.Name }}
   template:
-    metadata:
-      labels:
-        pod.name: "main"
     spec:
       securityContext:
         fsGroup: 568
@@ -150,9 +147,6 @@ spec:
       pod.name: management
       app.kubernetes.io/name: {{ .Release.Name }}
   template:
-    metadata:
-      labels:
-        pod.name: "management"
     spec:
       securityContext:
         fsGroup: 568
@@ -300,9 +294,6 @@ spec:
       pod.name: signal
       app.kubernetes.io/name: {{ .Release.Name }}
   template:
-    metadata:
-      labels:
-        pod.name: "signal"
     spec:
       securityContext:
         fsGroup: 568
