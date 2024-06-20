@@ -13,14 +13,14 @@ spec:
   rules:
     - matches:
       - path:
-        type: PathPrefix
+          type: PathPrefix
           value: /api
       backendRefs:
         - name: {{ .Release.Name }}-api
           port: 80
     - matches:
       - path:
-        type: PathPrefix
+          type: PathPrefix
           value: /
       backendRefs:
         - name: {{ .Release.Name }}
