@@ -15,7 +15,6 @@ spec:
   template:
     metadata:
       labels:
-        pod.lifecycle: "permanent"
         pod.name: "main"
     spec:
       securityContext:
