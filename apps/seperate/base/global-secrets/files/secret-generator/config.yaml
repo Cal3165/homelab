@@ -78,6 +78,3 @@
     - key: client_id
       length: 32
       special: false
-    - key: token
-      length: 40
-      special: false

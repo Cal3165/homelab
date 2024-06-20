@@ -2,6 +2,20 @@ data "authentik_flow" "default-provider-authorization-implicit-consent" {
   slug = "default-provider-authorization-implicit-consent"
 }
 
+data "authentik_brand" "authentik-default" {
+  domain = "authentik-default"
+}
+
+data "authentik_flow" "default-device-flow" {
+  slug = "default-source-pre-authentication"
+}
+
+resource "authentik_brand" "authentik-default" {
+  domain = "authentik-default"
+  flow_device_code = data.authentik_flow.default-device-flow.id
+}
+
+
 
 resource "authentik_provider_oauth2" "netbird" {
   name          = "Netbird"
@@ -28,7 +42,7 @@ resource "authentik_provider_oauth2" "netbird" {
   ]
 }
 
-resource "authentik_application" "app" {
+resource "authentik_application" "netbird" {
   name              = "Netbird"
   slug              = replace(lower("Netbird"), "/w", "_")
   protocol_provider = authentik_provider_oauth2.netbird.id
@@ -39,6 +53,18 @@ resource "authentik_user" "netbird" {
   name     = "Netbird"
   type     = "service_account"
   path     = "goauthentik.io/service-accounts"
-  password = data.kubernetes_secret.terraform-config-secrets.data.netbird-token
   groups = [data.authentik_group.akadmins.id]
+}
+
+resource "authentik_token" "netbird_password" {
+  identifier  = "netbird_password"
+  user        = authentik_user.netbird.id
+  description = "Netbird Password"
+  expiring = false
+}
+
+resource "authentik_policy_binding" "app-access" {
+  target = authentik_application.netbird.uuid
+  user = authentik_user.netbird.id
+  order  = 0
 }
