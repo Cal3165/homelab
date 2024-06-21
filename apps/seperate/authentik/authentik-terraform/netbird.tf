@@ -2,10 +2,6 @@ data "authentik_flow" "default-provider-authorization-implicit-consent" {
   slug = "default-provider-authorization-implicit-consent"
 }
 
-data "authentik_brand" "authentik-default" {
-  domain = "authentik-default"
-}
-
 data "authentik_flow" "default-device-flow" {
   slug = "default-source-pre-authentication"
 }

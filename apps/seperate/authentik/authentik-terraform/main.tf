@@ -103,3 +103,66 @@ resource "kubernetes_secret" "authentik_setup_output" {
     netbird_password = authentik_token.netbird_password.key
   }
 }
+
+
+### Domain ###
+resource "authentik_provider_proxy" "domain-proxy-provider" {
+  name                  = "domain-proxy-provider"
+  mode                  = "forward_domain"
+  authorization_flow    = data.authentik_flow.default-authorization-flow.id
+  authentication_flow   = data.authentik_flow.default-authentication-flow.id
+  external_host         = "https://notusa.uk"
+}
+resource "authentik_application" "domain-proxy-application" {
+  name              = "Domain Proxy"
+  slug              = "domain-proxy-application"
+  protocol_provider = authentik_provider_proxy.domain-proxy-provider.id
+  meta_launch_url   = "blank://blank"
+}
+### Traefik ###
+resource "authentik_provider_proxy" "traefik-provider" {
+  name                  = "traefik-provider"
+  mode                  = "forward_single"
+  authorization_flow    = data.authentik_flow.default-authorization-flow.id
+  authentication_flow   = data.authentik_flow.default-authentication-flow.id
+  external_host         = "https://traefik.notusa.uk/"
+}
+resource "authentik_application" "traefik-application" {
+  name              = "Traefik"
+  slug              = "traefik-application"
+  protocol_provider = authentik_provider_proxy.traefik-provider.id
+}
+
+resource "authentik_provider_proxy" "domain-proxy-provider" {
+  name                  = "domain-proxy-provider"
+  mode                  = "forward_domain"
+  external_host = "https://auth.notusa.uk/"
+  cookie_domain = "notusa.uk"
+  access_token_validity = "hours=24"
+  authorization_flow = data.authentik_flow.default-authorization-flow.id
+}
+
+resource "authentik_application" "application_domain_forward_auth" {
+  name              = "Domain Proxy"
+  slug              = "domain-proxy-application"
+  protocol_provider = authentik_provider_proxy.domain-proxy-provider.id
+  meta_launch_url   = "blank://blank"
+}
+
+resource "authentik_service_connection_kubernetes" "local" {
+  name = "Local Kubernetes Cluster"
+  local = true
+}
+
+resource "authentik_outpost" "proxy_outpost" {
+  name = "Proxy Outpost"
+  protocol_providers = [
+  authentik_provider_proxy.domain-proxy-provider.id,
+  authentik_provider_proxy.traefik-provider.id
+  ]
+  config = jsonencode({
+    authentik_host = format("https://auth.notusa.uk")
+    authentik_host_insecure = false
+  })
+  service_connection = authentik_service_connection_kubernetes.local.id
+}
