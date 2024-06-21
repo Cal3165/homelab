@@ -108,8 +108,7 @@ resource "kubernetes_secret" "authentik_setup_output" {
 resource "authentik_provider_proxy" "traefik-provider" {
   name                  = "traefik-provider"
   mode                  = "forward_single"
-  authorization_flow    = data.authentik_flow.default-authorization-flow.id
-  authentication_flow   = data.authentik_flow.default-authentication-flow.id
+  authorization_flow    = data.authentik_flow.default-provider-authorization-implicit-consent.id
   external_host         = "https://traefik.notusa.uk/"
 }
 resource "authentik_application" "traefik-application" {
@@ -124,7 +123,7 @@ resource "authentik_provider_proxy" "domain-proxy-provider" {
   external_host = "https://auth.notusa.uk/"
   cookie_domain = "notusa.uk"
   access_token_validity = "hours=24"
-  authorization_flow = data.authentik_flow.default-authorization-flow.id
+  authorization_flow = data.authentik_flow.default-provider-authorization-implicit-consent.id
 }
 
 resource "authentik_application" "application_domain_forward_auth" {
