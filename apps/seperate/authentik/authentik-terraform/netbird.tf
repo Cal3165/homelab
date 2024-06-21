@@ -6,9 +6,24 @@ data "authentik_flow" "default-device-flow" {
   slug = "default-source-pre-authentication"
 }
 
-resource "authentik_brand" "authentik-default" {
+data "authentik_brand" "authentik-default" {
   domain = "authentik-default"
+}
+
+
+resource "authentik_brand" "authentik-new" {
+  domain = "notusa"
+  branding_favicon = data.authentik_brand.branding_favicon
+  branding_logo = data.authentik_brand.branding_logo
+  branding_title  = "Notusa"
+  default = true
+  flow_authentication = data.authentik_brand.flow_authentication
+  flow_invalidation = data.authentik_brand.flow_invalidation
+  flow_recovery = data.authentik_brand.flow_recovery
+  flow_unenrollment = data.authentik_brand.flow_unenrollment
+  flow_user_settings = data.authentik_brand.flow_user_settings
   flow_device_code = data.authentik_flow.default-device-flow.id
+  web_certificate = data.authentik_brand.web_certificate
 }
 
 
