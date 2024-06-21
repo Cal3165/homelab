@@ -104,21 +104,6 @@ resource "kubernetes_secret" "authentik_setup_output" {
   }
 }
 
-
-### Domain ###
-resource "authentik_provider_proxy" "domain-proxy-provider" {
-  name                  = "domain-proxy-provider"
-  mode                  = "forward_domain"
-  authorization_flow    = data.authentik_flow.default-authorization-flow.id
-  authentication_flow   = data.authentik_flow.default-authentication-flow.id
-  external_host         = "https://notusa.uk"
-}
-resource "authentik_application" "domain-proxy-application" {
-  name              = "Domain Proxy"
-  slug              = "domain-proxy-application"
-  protocol_provider = authentik_provider_proxy.domain-proxy-provider.id
-  meta_launch_url   = "blank://blank"
-}
 ### Traefik ###
 resource "authentik_provider_proxy" "traefik-provider" {
   name                  = "traefik-provider"
