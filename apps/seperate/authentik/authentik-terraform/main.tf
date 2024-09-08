@@ -47,19 +47,19 @@ data "authentik_certificate_key_pair" "generated" {
 }
 
 # Defualts
-data "authentik_property_mapping_provider_scope" "scope-email" {
+data "authentik_property_mapping_provider_scope" "email" {
   managed = "goauthentik.io/providers/oauth2/scope-email"
 }
 
-data "authentik_property_mapping_provider_scope" "scope-profile" {
+data "authentik_property_mapping_provider_scope" "profile" {
   managed = "goauthentik.io/providers/oauth2/scope-profile"
 }
 
-data "authentik_property_mapping_provider_scope" "scope-openid" {
+data "authentik_property_mapping_provider_scope" "openid" {
   managed = "goauthentik.io/providers/oauth2/scope-openid"
 }
 
-data "authentik_property_mapping_provider_scope" "scope-offline-access" {
+data "authentik_property_mapping_provider_scope" "offline-access" {
   managed = "goauthentik.io/providers/oauth2/scope-offline_access"
 }
 

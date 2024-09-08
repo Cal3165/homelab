@@ -46,10 +46,10 @@ resource "authentik_provider_oauth2" "netbird" {
   access_code_validity = "minutes=10"
   sub_mode = "user_id"
   property_mappings = [
-    data.authentik_property_mapping_provider_scope.scope-email.id,
-    data.authentik_property_mapping_provider_scope.scope-profile.id,
-    data.authentik_property_mapping_provider_scope.scope-openid.id,
-    data.authentik_property_mapping_provider_scope.scope-offline-access.id,
+    data.authentik_property_mapping_provider_scope.email.id,
+    data.authentik_property_mapping_provider_scope.profile.id,
+    data.authentik_property_mapping_provider_scope.openid.id,
+    data.authentik_property_mapping_provider_scope.offline-access.id,
   ]
 }
 
