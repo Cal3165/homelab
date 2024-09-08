@@ -8,8 +8,8 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/Cal3165/homelab
-        revision: master
+        repoURL: &repoURL https://github.com/Cal3165/homelab
+        revision: &revision master
         directories:
           - path: apps/platform/*
   template:
