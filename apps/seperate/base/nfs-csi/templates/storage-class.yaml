@@ -10,3 +10,5 @@ parameters:
   share: /mnt/HDD/Apps
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
+mountOptions:
+  - nolock
