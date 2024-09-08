@@ -8,8 +8,8 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: &repoURL http://gitea-http.gitea:3000/ops/homelab
-        revision: &revision master
+        repoURL: https://github.com/Cal3165/homelab
+        revision: master
         directories:
           - path: apps/apps/*
   template:

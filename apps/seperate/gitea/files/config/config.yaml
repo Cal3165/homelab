@@ -19,49 +19,49 @@ repositories:
       source: https://github.com/Cal3165/homelab
       mirror: false
 files:
-  - path: appOfApps/100-argocd.yaml
-    owner: ops
-    repo: homelab
-    branch: master
-  - path: appOfApps/0-monitoring.yaml
-    owner: ops
-    repo: homelab
-    branch: master
-  - path: appOfApps/1-ingress.yaml
-    owner: ops
-    repo: homelab
-    branch: master
-  - path: appOfApps/1-nfs-csi.yaml
-    owner: ops
-    repo: homelab
-    branch: master
-  - path: appOfApps/1-cert-manager.yaml
-    owner: ops
-    repo: homelab
-    branch: master
-  - path: appOfApps/1-global-secrets.yaml
-    owner: ops
-    repo: homelab
-    branch: master
-  - path: appOfApps/1-longhorn.yaml
-    owner: ops
-    repo: homelab
-    branch: master
-  - path: appOfApps/1-base.yaml
-    owner: ops
-    repo: homelab
-    branch: master
-  - path: appOfApps/2-authentik.yaml
-    owner: ops
-    repo: homelab
-    branch: master
-  - path: appOfApps/3-gitea.yaml
-    owner: ops
-    repo: homelab
-    branch: master
+  # - path: appOfApps/100-argocd.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
+  # - path: appOfApps/0-monitoring.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
+  # - path: appOfApps/1-ingress.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
+  # - path: appOfApps/1-nfs-csi.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
+  # - path: appOfApps/1-cert-manager.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
+  # - path: appOfApps/1-global-secrets.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
+  # - path: appOfApps/1-longhorn.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
+  # - path: appOfApps/1-base.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
+  # - path: appOfApps/2-authentik.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
+  # - path: appOfApps/3-gitea.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
 replacefile:
-  - sourcepath: apps/argocd/values-incluster.yaml
-    destpath: apps/argocd/values.yaml
-    owner: ops
-    repo: homelab
-    branch: master
+  # - sourcepath: apps/argocd/values-incluster.yaml
+  #   destpath: apps/argocd/values.yaml
+  #   owner: ops
+  #   repo: homelab
+  #   branch: master
