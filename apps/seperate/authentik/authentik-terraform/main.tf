@@ -48,19 +48,19 @@ data "authentik_certificate_key_pair" "generated" {
 
 # Defualts
 data "authentik_property_mapping_provider_scope" "scope-email" {
-  name = "authentik default OAuth Mapping: OpenID 'email'"
+  managed = "goauthentik.io/providers/oauth2/scope-email"
 }
 
 data "authentik_property_mapping_provider_scope" "scope-profile" {
-  name = "authentik default OAuth Mapping: OpenID 'profile'"
+  managed = "goauthentik.io/providers/oauth2/scope-profile"
 }
 
 data "authentik_property_mapping_provider_scope" "scope-openid" {
-  name = "authentik default OAuth Mapping: OpenID 'openid'"
+  managed = "goauthentik.io/providers/oauth2/scope-openid"
 }
 
 data "authentik_property_mapping_provider_scope" "scope-offline-access" {
-  name = "authentik default OAuth Mapping: OpenID 'offline_access'"
+  managed = "goauthentik.io/providers/oauth2/scope-offline_access"
 }
 
 # Create a scope mapping
