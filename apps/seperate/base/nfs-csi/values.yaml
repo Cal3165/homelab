@@ -1,6 +1,6 @@
 csi-driver-nfs:
   controller:
-    runOnControlPlane: true
+    runOnControlPlane: false
     replicas: 2
     affinity:
       podAntiAffinity:
